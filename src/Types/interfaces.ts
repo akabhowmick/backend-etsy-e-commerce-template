@@ -10,6 +10,7 @@ export interface User {
   state: string;
   country: string;
   zipCode: string;
+  orderHistory?: string[];
 }
 
 export interface Product {
