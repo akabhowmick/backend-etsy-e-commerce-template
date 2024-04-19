@@ -1,25 +1,34 @@
-import { QuizUsersInfo } from "../../types/interfaces";
+
+import { User } from "../../Types/interfaces";
 import { supabase } from "../supabase-requests";
 
-export const addUserToDB = async (user: QuizUsersInfo) => {
+export const addUserToDB = async (user: User) => {
   const {
-    numberOfQuizzesPlayed,
-    overallQuizPoints,
-    overallRanking,
-    userName,
-    user_id,
-    user_image,
+    firstName,
+    lastName,
+    email,
+    phone,
+    addressLine1,
+    city,
+    state,
+    country,
+    zipCode,
+    orderHistory,
   } = user;
   const { data, error } = await supabase
     .from("QuizUsersInfo")
     .insert([
       {
-        numberOfQuizzesPlayed,
-        overallQuizPoints,
-        overallRanking,
-        userName,
-        user_id,
-        user_image,
+        firstName,
+        lastName,
+        email,
+        phone,
+        addressLine1,
+        city,
+        state,
+        country,
+        zipCode,
+        orderHistory,
       },
     ])
     .select();
