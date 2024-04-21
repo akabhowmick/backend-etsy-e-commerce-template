@@ -9,6 +9,7 @@ import { ProductPage } from "../../Pages/ProductPages/ProductPage";
 import { ProductDescriptionPage } from "../../Pages/ProductPages/ProductDescriptionPage";
 import { CartPage } from "../../Pages/Cart/CartPage";
 import { UploadImageForm } from "../../Pages/UploadImage/UploadImage";
+import { SignInForm } from "../../Pages/SignIn/SignInForm";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -18,6 +19,7 @@ export const router = createBrowserRouter(
       <Route path="page-1" element={<ProductPage pageHeader="Category 1 Products" pageContent="Type-1" />} />
       <Route path="page-2" element={<ProductPage pageHeader="Category 1 Products" pageContent="Type-2" />} />
       <Route path="page-3" element={<ProductPage pageHeader="Category 1 Products" pageContent="Type-3" />} />
+      <Route path="/signin" element={<SignInForm />} />
       <Route path="/products/:productId" element={<ProductDescriptionPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="contact-us" element={<ContactUs />} />

@@ -21,6 +21,8 @@ export const Navbar = () => {
     setShowNavbar(!showNavbar);
   };
 
+  const navbarLinks = [...links, { key: "Sign In", value: "/signin" }];
+
   const CartLink = (
     <NavLink
       to="/cart"
@@ -41,7 +43,7 @@ export const Navbar = () => {
 
   const linksWithNavLink = (
     <div className="navbar-links-container">
-      {links.map((link, index) => (
+      {navbarLinks.map((link, index) => (
         <NavLink
           onClick={() => setShowNavbar(false)}
           key={index}
