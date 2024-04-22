@@ -3,6 +3,7 @@ import "./SignIn.css";
 import { ValidLogin } from "../../Types/interfaces";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 const initialFormState = {
   email: "",
@@ -16,6 +17,8 @@ const initialFormState = {
 };
 
 export const SignInForm = () => {
+  const { signUpUser, signInUser } = useAuthContext();
+
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState<ValidLogin>(initialFormState);
 
@@ -120,6 +123,12 @@ export const SignInForm = () => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
+    const user = { email: formData.email, password: formData.password };
+    if (formType === "login") {
+      signInUser(user);
+    } else {
+      signUpUser(user);
+    }
   };
 
   const resetForm = () => {

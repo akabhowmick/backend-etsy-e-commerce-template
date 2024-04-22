@@ -9,16 +9,19 @@ import { UserProvider } from "./providers/UserProvider";
 import { Footer } from "./Components/Footer/Footer";
 // import { Cart } from "./Pages/Cart/Cart";
 import { router } from "./Components/Layouts/Router";
+import { AuthProvider } from "./providers/AuthProvider";
 
 function App() {
   return (
     <>
-      <UserProvider>
-        <CartProvider>
-          <RouterProvider router={router} />
-          <Footer />
-        </CartProvider>
-      </UserProvider>
+      <AuthProvider>
+        <UserProvider>
+          <CartProvider>
+            <RouterProvider router={router} />
+            <Footer />
+          </CartProvider>
+        </UserProvider>
+      </AuthProvider>
     </>
   );
 }

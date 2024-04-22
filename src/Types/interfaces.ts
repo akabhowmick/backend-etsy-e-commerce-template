@@ -1,17 +1,21 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Session, WeakPassword } from "@supabase/supabase-js";
 
-export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
+interface Address {
   addressLine1: string;
   city: string;
   state: string;
   country: string;
   zipCode: string;
+}
+
+export interface User {
   user_id?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  userAddress: Address;
   orderHistory?: string[];
 }
 

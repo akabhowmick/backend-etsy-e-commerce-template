@@ -35,6 +35,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  useEffect(() => {
+    checkUserSession();
+  }, []); 
+  
   const checkUserSession = async () => {
     const {
       data: { user },
@@ -54,10 +58,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       localStorage.removeItem("user");
     }
   };
-
-  useEffect(() => {
-    checkUserSession();
-  }, []);
 
   const signUpUser = async (userInfo: UserSignIn) => {
     const { data, error } = await signUpUserSupabase(userInfo.email, userInfo.password);
