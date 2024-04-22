@@ -6,3 +6,19 @@ Supabase
   => name 
   => address
   => order history 
+
+stuff that changes => no more checkout for the first step 
+address if button checked then => we will need to put in the current info 
+change profile => email, phone number, name so first step of the checkout 
+
+login and sign up have to work with supabase 
+
+
+Schedule: 
+
+4/21 - complete the validation today for the passwords and set up to talk to the supabase backend for login and logout 
+4/22 - display the account details with two sections: profile and address
+4/23 - profile edits 
+4/24 - address changes
+4/25 - order history 
+4/26 - double check logic 

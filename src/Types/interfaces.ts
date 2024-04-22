@@ -56,3 +56,14 @@ export interface KeyValueStringPairs {
   key: string;
   value: string;
 }
+
+export interface ValidLogin {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  match: boolean;
+  charNumberValid: boolean;
+  specialCharValid: boolean;
+  uppercaseValid: boolean;
+  numberValid: boolean;
+}

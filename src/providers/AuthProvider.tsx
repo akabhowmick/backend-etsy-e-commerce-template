@@ -13,7 +13,6 @@ interface AuthContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   loggedIn: boolean;
   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-
   userLoading: boolean;
   signUpUser: (user: UserSignIn) => Promise<string | undefined>;
   signInUser: (user: UserSignIn) => Promise<boolean>;

@@ -13,9 +13,9 @@
   --dark: #323234;
   --light: #fff;
   --warning: #ffcc00;
-  --danger: #d10202;
+  --danger: #f2180a;
   --info: #2ea5dc;
-  --success: #1cca56;
+  --success: #11af41;
 
   /* font brands  */
   --font: "Poppins", sans-serif;
@@ -38,6 +38,17 @@
   --card-top-offset: 1em;
   --numCards: 4;
   --outline-width: 0px;
+
+  /* break points */
+
+  --break--sm: 320px;
+  --break--md: 641px;
+  --break--lg: 769px;
+  --break--xl: 1025px;
+
+  /* inputs */
+  --input-font-family: "Muli", sans-serif;
+  --input-font-size: 18px;
 }
 
 h1,
