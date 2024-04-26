@@ -192,3 +192,11 @@ form .btn input[type="submit"] {
   padding: 0;
   margin: 5px 0;
 }
+
+
+@media (max-width: 37.5em) {
+  .wrapper{
+    max-width: 95%;
+    margin: 5rem auto 2rem;
+  }
+}

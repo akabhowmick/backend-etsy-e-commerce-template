@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./SignIn.css";
 import { ValidLogin } from "../../Types/interfaces";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useAuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const initialFormState = {
   email: "",
@@ -18,6 +19,15 @@ const initialFormState = {
 
 export const SignInForm = () => {
   const { signUpUser, signInUser } = useAuthContext();
+  const navigate = useNavigate();
+
+  //!  we need to make the user's saved info appear
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      console.log("we have a user");
+      navigate("/account");
+    }
+  }, [navigate]);
 
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState<ValidLogin>(initialFormState);
@@ -198,44 +208,39 @@ export const SignInForm = () => {
   );
 
   return (
-    <>
-      <div className="wrapper">
-        <div className="title-text">
-          <div className="title">{formType === "login" ? "Login Form" : "Signup Form"}</div>
-        </div>
-        <div className="form-container">
-          <div className="slide-controls">
-            <input
-              type="radio"
-              name="slide"
-              id="login"
-              checked={formType === "login"}
-              onChange={(e) => handleSlide(e)}
-            />
-            <input
-              type="radio"
-              name="slide"
-              id="signup"
-              checked={formType === "signup"}
-              onChange={(e) => handleSlide(e)}
-            />
-            <label
-              htmlFor="login"
-              className={`slide login ${formType === "login" ? "active" : ""}`}
-            >
-              Login
-            </label>
-            <label
-              htmlFor="signup"
-              className={`slide signup ${formType === "signup" ? "active" : ""}`}
-            >
-              Signup
-            </label>
-            <div className="slider-tab"></div>
-          </div>
-          <div className="form-inner">{renderForm(formType)}</div>
-        </div>
+    <div className="wrapper">
+      <div className="title-text">
+        <div className="title">{formType === "login" ? "Login Form" : "Signup Form"}</div>
       </div>
-    </>
+      <div className="form-container">
+        <div className="slide-controls">
+          <input
+            type="radio"
+            name="slide"
+            id="login"
+            checked={formType === "login"}
+            onChange={(e) => handleSlide(e)}
+          />
+          <input
+            type="radio"
+            name="slide"
+            id="signup"
+            checked={formType === "signup"}
+            onChange={(e) => handleSlide(e)}
+          />
+          <label htmlFor="login" className={`slide login ${formType === "login" ? "active" : ""}`}>
+            Login
+          </label>
+          <label
+            htmlFor="signup"
+            className={`slide signup ${formType === "signup" ? "active" : ""}`}
+          >
+            Signup
+          </label>
+          <div className="slider-tab"></div>
+        </div>
+        <div className="form-inner">{renderForm(formType)}</div>
+      </div>
+    </div>
   );
 };

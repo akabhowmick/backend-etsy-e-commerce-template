@@ -1,17 +1,19 @@
 import "./Navbar.css";
-import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, Outlet } from "react-router-dom";
-
-import { NavUnlisted } from "./NavbarStyles";
-import "./Navbar.css";
 import { useState } from "react";
 
-import navbarLogo from "../../assets/Main/logo.png";
+import { NavLink, Outlet } from "react-router-dom";
+import { NavUnlisted } from "./NavbarStyles";
+
 import { links } from "../../utils/NavbarAndFooterLinks";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCartContext } from "../../providers/CartProvider";
+
+import navbarLogo from "../../assets/Main/logo.png";
 import { companyName } from "../../utils/HelpfulText";
+
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const Navbar = () => {
   const { cartItems } = useCartContext();
@@ -21,7 +23,7 @@ export const Navbar = () => {
     setShowNavbar(!showNavbar);
   };
 
-  const navbarLinks = [...links, { key: "Sign In", value: "/signin" }];
+  const navbarLinks = [...links];
 
   const CartLink = (
     <NavLink
@@ -37,6 +39,23 @@ export const Navbar = () => {
       <li id="cart-btn">
         <FontAwesomeIcon icon={faCartShopping} />(
         {cartItems.reduce((acc, item) => acc + item.quantity, 0)})
+      </li>
+    </NavLink>
+  );
+
+  const AccountLink = (
+    <NavLink
+      to="/account"
+      className={({ isActive, isPending, isTransitioning }) =>
+        [
+          isPending ? "pending" : "",
+          isActive ? "active" : "",
+          isTransitioning ? "transitioning" : "",
+        ].join(" ")
+      }
+    >
+      <li>
+        <AccountCircleIcon fontSize="large" />
       </li>
     </NavLink>
   );
@@ -59,6 +78,7 @@ export const Navbar = () => {
           <li>{link.key}</li>
         </NavLink>
       ))}
+      {AccountLink}
       {CartLink}
     </div>
   );
@@ -84,6 +104,7 @@ export const Navbar = () => {
               <MenuIcon />
             </div>
             <div className="cart-small-screen">{CartLink}</div>
+            <div className="cart-small-screen">{AccountLink}</div>
             {showNavbar && (
               <div className="nav-elements">
                 <ul>{linksWithNavLink}</ul>
@@ -99,5 +120,3 @@ export const Navbar = () => {
     </div>
   );
 };
-
-// display the cart icon only when small screen

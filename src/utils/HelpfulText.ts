@@ -1,3 +1,5 @@
+import { User } from "../Types/interfaces";
+
 export const heroText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna";
 
@@ -34,16 +36,20 @@ export const fullDetailedDetails = [
   returnPolicy,
 ];
 
-export const initialUserValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
+const initialAddress = {
   addressLine1: "",
   city: "",
   state: "",
   country: "",
   zipCode: "",
+};
+
+export const initialUserValues: User = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  userAddress: initialAddress,
 };
 
 export const reviewTexts = [
@@ -72,7 +78,6 @@ export const reviewTexts = [
     id: 4,
   },
 ];
-
 
 export const companyName = "Your Company Name";
 export const companyTagline = "Lorem ipsum dolor consectetur!";

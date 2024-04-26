@@ -8,7 +8,7 @@ import { UserProvider } from "./providers/UserProvider";
 // sections or components
 import { Footer } from "./Components/Footer/Footer";
 // import { Cart } from "./Pages/Cart/Cart";
-import { router } from "./Components/Layouts/Router";
+import { Routes } from "./Components/Layouts/Router";
 import { AuthProvider } from "./providers/AuthProvider";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <AuthProvider>
         <UserProvider>
           <CartProvider>
-            <RouterProvider router={router} />
+            <RouterProvider router={Routes()} />
             <Footer />
           </CartProvider>
         </UserProvider>
