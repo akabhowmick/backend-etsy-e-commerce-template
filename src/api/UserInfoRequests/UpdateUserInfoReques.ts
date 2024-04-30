@@ -2,7 +2,7 @@ import { User } from "../../Types/interfaces";
 import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
-export const updateQuizUserInfoInDB = async (user: User) => {
+export const updateUserInfoInDB = async (user: User) => {
   const { user_id, firstName, lastName, email, phone, userAddress, orderHistory } = user;
   const { data, error } = await supabase
     .from("UserInfo")

@@ -9,11 +9,11 @@ import { useUserContext } from "../../../providers/UserProvider";
 import { Product } from "../../../Types/interfaces";
 import { orderReviewFormId, uploadImagePage } from "../../../utils/ApiKeys";
 import Button from "@mui/material/Button";
+import { addressToString } from "../../../utils/HelperFunctions";
 
 export default function Review() {
   const { cartItems, finalTotal } = useCartContext();
   const { user, order } = useUserContext();
-  const addresses = [user.addressLine1, user.city, user.state, user.country, user.zipCode];
 
   const infoForSeller = [
     { name: "_template_id", value: "table" },
@@ -30,7 +30,7 @@ export default function Review() {
     { name: "Order-Number", value: order },
     {
       name: "Shipping-Address",
-      value: addresses.join(", "),
+      value: addressToString(user.userAddress),
     },
     {
       name: "Total-Cost",
@@ -88,7 +88,7 @@ export default function Review() {
             Shipping
           </Typography>
           <Typography gutterBottom>{user.firstName + " " + user.lastName}</Typography>
-          <Typography gutterBottom>{addresses.join(", ")}</Typography>
+          <Typography gutterBottom>{addressToString(user.userAddress)}</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" id="order-number">

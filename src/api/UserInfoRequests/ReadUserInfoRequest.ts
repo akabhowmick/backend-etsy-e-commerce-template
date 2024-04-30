@@ -1,7 +1,7 @@
 import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
-export const getSingleQuizUserInfoFromDB = async (userId: string) => {
+export const getSingleUserInfoFromDB = async (userId: string) => {
   const { data, error } = await supabase
     .from("UserInfo")
     .select("*")

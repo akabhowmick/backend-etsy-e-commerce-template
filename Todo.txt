@@ -15,6 +15,12 @@ login and sign up have to work with supabase
 
 
 Schedule: 
+Things to do:
+  sign up => ok but need a redirect to the account 
+  sign in => same redirect to the account 
+  logout btn needed in the account 
+
+=> in check out implement a feature that loads in the profile views 
 
 4/21 - supabase backend for login/logout (kind of works) => backed up
 4/22 - display the account details with three tabs sections: profile and address; logout 
@@ -34,3 +40,4 @@ should we treat the address as a separate table?
 
 
 back to the regular one => when small screen => 275 product card width + 10px margin
+

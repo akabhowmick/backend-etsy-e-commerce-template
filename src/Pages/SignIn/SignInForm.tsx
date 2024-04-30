@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./SignIn.css";
-import { ValidLogin } from "../../Types/interfaces";
+import { User, ValidLogin } from "../../Types/interfaces";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useAuthContext } from "../../providers/AuthProvider";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { addUserToDB } from "../../api/UserInfoRequests/CreateUserInfoRequest";
 
 const initialFormState = {
   email: "",
@@ -19,15 +20,15 @@ const initialFormState = {
 
 export const SignInForm = () => {
   const { signUpUser, signInUser } = useAuthContext();
-  const navigate = useNavigate();
 
   //!  we need to make the user's saved info appear
-  useEffect(() => {
-    if (localStorage.getItem("user")) {
-      console.log("we have a user");
-      navigate("/account");
-    }
-  }, [navigate]);
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (localStorage.getItem("user")) {
+  //     console.log("we have a user");
+  //     navigate("/account");
+  //   }
+  // }, [navigate]);
 
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState<ValidLogin>(initialFormState);
@@ -40,8 +41,7 @@ export const SignInForm = () => {
   };
 
   const checkSpecialCharacters = (password: string) => {
-    // eslint-disable-next-line no-useless-escape
-    const pattern = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/g;
+    const pattern = /[@!#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
     setFormData((prevFormData) => ({
       ...prevFormData,
       specialCharValid: pattern.test(password),
@@ -114,30 +114,36 @@ export const SignInForm = () => {
     checkNumber(password);
   };
 
-  const comparePassword = () => {
-    const { password, confirmPassword } = formData;
-    setFormData({
-      ...formData,
-      match: password === confirmPassword,
-    });
-  };
-
   const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const confirmPassword = event.target.value;
+    const { password } = formData;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      confirmPassword,
-      match: false,
+      confirmPassword: event.target.value,
+      match: password === event.target.value,
     }));
   };
 
-  const handleSubmit = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     event.preventDefault();
     const user = { email: formData.email, password: formData.password };
+    let userSignedIn = false;
     if (formType === "login") {
       signInUser(user);
     } else {
-      signUpUser(user);
+      const newUserId = await signUpUser(user);
+      if (newUserId) {
+        userSignedIn = true;
+      }
+      // ! delete later:
+      console.log("newUser", newUserId); 
+      const newUser: User = {
+        user_id: newUserId!,
+        email: user.email,
+      };
+      addUserToDB(newUser);
+    }
+    if (userSignedIn) {
+      resetForm();
     }
   };
 
@@ -177,7 +183,6 @@ export const SignInForm = () => {
               className={`input${formData.match === false ? "--error" : ""}`}
               value={formData.confirmPassword}
               onChange={(e) => handleConfirmPasswordChange(e)}
-              onBlur={comparePassword}
             />
           </div>
           {validations}

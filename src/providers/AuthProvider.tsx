@@ -1,7 +1,6 @@
 import { User } from "@supabase/supabase-js";
 import { useState, useEffect, createContext, useContext, ReactNode } from "react";
 import swal from "sweetalert";
-import { supabase } from "../api/supabase-requests";
 import { UserSignIn } from "../Types/interfaces";
 import { signOutUserSupabase } from "../api/UserAuthRequests/LogoutUser";
 import { signUpUserSupabase } from "../api/UserAuthRequests/SignUpUser";
@@ -27,6 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userLoading, setUserLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  // ! set a timeout function so not forever 
   const setLocalStorage = (user: User) => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -37,17 +37,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     checkUserSession();
-  }, []); 
-  
+  }, []);
+
   const checkUserSession = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) {
-      setUser(user);
+    const localUser = localStorage.getItem("user");
+    if (localUser) {
+      setUser(JSON.parse(localUser));
+      setUserLoading(false);
       setLoggedIn(true);
     }
-    setUserLoading(false);
+    // import { supabase } from "../api/supabase-requests";
+    // const {
+    //   data: { user },
+    // } = await supabase.auth.getUser();
+    // console.log("User session: " + user);
+    // if (user) {
+    //   setUser(user);
+    //   setLoggedIn(true);
+    // }
   };
 
   const logOutUser = async () => {

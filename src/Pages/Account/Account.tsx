@@ -9,8 +9,12 @@ export const Account = () => {
   const { user } = useUserContext();
   return (
     <Grid>
-      <Typography variant="h6">{user.firstName + user.lastName}</Typography>
-      <Typography color="text.secondary"> Welcome to your account</Typography>
+      {user !== undefined && (
+        <Typography variant="h6">
+          Welcome to your account
+          {user.firstName?.toUpperCase() + " " + user.lastName?.toUpperCase()}
+        </Typography>
+      )}
       <SettingsCard />
     </Grid>
   );

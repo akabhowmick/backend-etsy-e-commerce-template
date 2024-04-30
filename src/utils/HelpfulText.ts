@@ -45,6 +45,7 @@ const initialAddress = {
 };
 
 export const initialUserValues: User = {
+  user_id: "0",
   firstName: "",
   lastName: "",
   email: "",

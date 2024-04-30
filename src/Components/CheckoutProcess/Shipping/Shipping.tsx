@@ -81,7 +81,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   name="addressLine1"
                   label="Address Line 1"
                   onChange={onChange}
-                  value={formValues.addressLine1}
+                  value={formValues.userAddress?.addressLine1}
                   fullWidth
                   variant="standard"
                   required
@@ -92,7 +92,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   name="city"
                   label="City"
                   onChange={onChange}
-                  value={formValues.city}
+                  value={formValues.userAddress?.city}
                   fullWidth
                   variant="standard"
                   required
@@ -103,7 +103,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   name="state"
                   label="State"
                   onChange={onChange}
-                  value={formValues.state}
+                  value={formValues.userAddress?.state}
                   fullWidth
                   variant="standard"
                   required
@@ -114,7 +114,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   name="country"
                   label="Country"
                   onChange={onChange}
-                  value={formValues.country}
+                  value={formValues.userAddress?.country}
                   fullWidth
                   variant="standard"
                   required
@@ -125,7 +125,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                   name="zipCode"
                   label="Zip Code"
                   onChange={onChange}
-                  value={formValues.zipCode}
+                  value={formValues.userAddress?.zipCode}
                   fullWidth
                   variant="standard"
                   required

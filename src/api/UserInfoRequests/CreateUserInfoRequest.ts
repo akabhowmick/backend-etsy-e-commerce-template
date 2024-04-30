@@ -3,17 +3,13 @@ import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
 export const addUserToDB = async (user: User) => {
-  const { firstName, lastName, email, phone, userAddress, orderHistory } = user;
+  const { user_id, email } = user;
   const { data, error } = await supabase
     .from("UserInfo")
     .insert([
       {
-        firstName,
-        lastName,
+        user_id,
         email,
-        phone,
-        userAddress,
-        orderHistory,
       },
     ])
     .select();
@@ -21,7 +17,7 @@ export const addUserToDB = async (user: User) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Failed to register new user!",
+      text: error.message,
     });
     return;
   }
