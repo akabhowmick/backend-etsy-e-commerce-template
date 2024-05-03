@@ -7,17 +7,22 @@ import { useUserContext } from "../../providers/UserProvider";
 import { CustomInput } from "./CustomInput";
 
 export const ShowAndEditAddress = () => {
-  const { user } = useUserContext();
-  const [displayUser, setDisplayUser] = useState(user);
+  const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
+
+  const originalAddressValues = { ...user.userAddress };
+  console.log(originalAddressValues);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setDisplayUser({ ...displayUser, [event.target.name]: event.target.value });
+    setUser({
+      ...user,
+      userAddress: { ...user.userAddress, [event.target.name]: event.target.value },
+    });
   };
 
   const [edit, update] = useState({
     required: true,
     disabled: true,
-    isEdit: true,
+    isEdit: false,
   });
 
   const changeButton = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -25,9 +30,12 @@ export const ShowAndEditAddress = () => {
     edit.disabled = !edit.disabled;
     edit.isEdit = !edit.isEdit;
     update({ ...edit });
+    if (JSON.stringify(originalAddressValues) === JSON.stringify(user.userAddress)) {
+      console.log("dummy object", originalAddressValues);
+      console.log("real object", user.userAddress);
+      updateUserInfoThroughAccount(edit.isEdit);
+    }
   };
-
-  //! save should modify the current state
 
   return (
     <Card variant="outlined" sx={{ height: "100%", width: "100%" }}>
@@ -48,7 +56,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "addressLine1",
                 name: "Address Line 1",
-                value: displayUser.userAddress?.addressLine1,
+                value: user.userAddress?.addressLine1,
                 onChange: (e) => changeField(e),
                 title: "Address Line 1",
                 disabled: edit.disabled,
@@ -61,7 +69,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "city",
                 name: "city",
-                value: displayUser.userAddress?.city,
+                value: user.userAddress?.city,
                 onChange: (e) => changeField(e),
                 title: "City",
                 disabled: edit.disabled,
@@ -74,7 +82,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "state",
                 name: "state",
-                value: displayUser.userAddress?.state,
+                value: user.userAddress?.state,
                 onChange: (e) => changeField(e),
                 title: "State",
                 disabled: edit.disabled,
@@ -87,7 +95,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "country",
                 name: "country",
-                value: displayUser.userAddress?.country,
+                value: user.userAddress?.country,
                 onChange: (e) => changeField(e),
                 title: "Country",
                 disabled: edit.disabled,
@@ -100,7 +108,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "zipCode",
                 name: "zipCode",
-                value: displayUser.userAddress?.zipCode,
+                value: user.userAddress?.zipCode,
                 onChange: (e) => changeField(e),
                 title: "Zip Code",
                 disabled: edit.disabled,
@@ -108,7 +116,7 @@ export const ShowAndEditAddress = () => {
               }}
             />
           </Grid>
-          <Grid container justifyContent={{ xs: "center", md: "flex-end" }} item xs={6}>
+          <Grid item xs={6}>
             <Button
               sx={{ p: "1rem 2rem", my: 2, height: "3rem" }}
               component="button"
@@ -117,7 +125,7 @@ export const ShowAndEditAddress = () => {
               color="secondary"
               onClick={(e) => changeButton(e)}
             >
-              {edit.isEdit === false ? "UPDATE" : "EDIT"}
+              {edit.isEdit === true ? "CLICK TO SAVE UPDATE" : "CLICK TO EDIT"}
             </Button>
           </Grid>
         </FormControl>

@@ -7,10 +7,11 @@ import { useUserContext } from "../../providers/UserProvider";
 
 export const Account = () => {
   const { user } = useUserContext();
+  
   return (
     <Grid>
-      {user !== undefined && (
-        <Typography variant="h6">
+      {user.id !== 0 && (
+        <Typography variant="h6" color="black">
           Welcome to your account
           {user.firstName?.toUpperCase() + " " + user.lastName?.toUpperCase()}
         </Typography>

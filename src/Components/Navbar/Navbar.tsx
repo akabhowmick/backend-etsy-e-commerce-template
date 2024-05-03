@@ -14,8 +14,10 @@ import { companyName } from "../../utils/HelpfulText";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 export const Navbar = () => {
+  const { loggedIn } = useAuthContext();
   const { cartItems } = useCartContext();
   const [showNavbar, setShowNavbar] = useState(false);
 
@@ -43,9 +45,10 @@ export const Navbar = () => {
     </NavLink>
   );
 
+  //!check if the user has already logged in
   const AccountLink = (
     <NavLink
-      to="/account"
+      to={loggedIn ? "/account" : "/signin"}
       className={({ isActive, isPending, isTransitioning }) =>
         [
           isPending ? "pending" : "",

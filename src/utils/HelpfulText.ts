@@ -36,7 +36,7 @@ export const fullDetailedDetails = [
   returnPolicy,
 ];
 
-const initialAddress = {
+export const initialAddress = {
   addressLine1: "",
   city: "",
   state: "",
@@ -45,12 +45,14 @@ const initialAddress = {
 };
 
 export const initialUserValues: User = {
-  user_id: "0",
+  id: 0,
+  user_id: "",
   firstName: "",
   lastName: "",
   email: "",
   phone: "",
   userAddress: initialAddress,
+  orderHistory: [],
 };
 
 export const reviewTexts = [

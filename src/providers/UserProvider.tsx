@@ -4,11 +4,13 @@ import { v4 } from "uuid";
 import { User } from "../Types/interfaces";
 import { initialUserValues } from "../utils/HelpfulText";
 import { getSingleUserInfoFromDB } from "../api/UserInfoRequests/ReadUserInfoRequest";
+import { updateUserInfoInDB } from "../api/UserInfoRequests/UpdateUserInfoRequest";
 
 interface UserContextType {
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
   order: string;
+  updateUserInfoThroughAccount: (saveToProfile: boolean) => Promise<void>;
 }
 
 const UserContext = createContext({} as UserContextType);
@@ -21,9 +23,17 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const localUser = localStorage.getItem("user");
     if (localUser) {
       const potentialUser = await getSingleUserInfoFromDB(JSON.parse(localUser).id);
-      setUser(potentialUser as unknown as User);
+      if (potentialUser) {
+        setUser({ ...potentialUser[0], userAddress: JSON.parse(potentialUser[0].userAddress) });
+      }
     }
-  }, []);
+  }, [setUser]);
+
+  const updateUserInfoThroughAccount = async (saveToProfile: boolean) => {
+    if (saveToProfile) {
+      updateUserInfoInDB(user);
+    }
+  };
 
   useEffect(() => {
     getUserInfoOnFirstLoad();
@@ -39,6 +49,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         user,
         setUser,
         order,
+        updateUserInfoThroughAccount,
       }}
     >
       {children}

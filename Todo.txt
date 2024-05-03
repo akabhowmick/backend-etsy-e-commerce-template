@@ -22,22 +22,24 @@ Things to do:
 
 => in check out implement a feature that loads in the profile views 
 
-4/21 - supabase backend for login/logout (kind of works) => backed up
-4/22 - display the account details with three tabs sections: profile and address; logout 
+4/21 - supabase backend for login/logout (kind of works); logout 
 4/23 - profile edits 
 4/24 - address changes
-4/25 - order history 
 4/26 - double check logic 
 
-make a address type and include address information there => looks ok => 
 should we treat the address as a separate table? 
 => make sure i have access to the database 
   => database two things missing 
     => 1. Take off verification for email (?)
-    => 2. RLS policies based on the previous project
     => learn how to hide api keys 
+
+CSS: 
+  => back to the regular one => when small screen => 275 product card width + 10px margin
   => dark mode 
+  => order history 
 
+Account: 
+  No Account => ask to login then get redirected to the account
+  Yes Account => logout 
 
-back to the regular one => when small screen => 275 product card width + 10px margin
 

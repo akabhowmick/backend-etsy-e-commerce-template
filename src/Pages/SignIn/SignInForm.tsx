@@ -1,11 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./SignIn.css";
 import { User, ValidLogin } from "../../Types/interfaces";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useAuthContext } from "../../providers/AuthProvider";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { addUserToDB } from "../../api/UserInfoRequests/CreateUserInfoRequest";
+import { initialAddress } from "../../utils/HelpfulText";
 
 const initialFormState = {
   email: "",
@@ -21,14 +22,13 @@ const initialFormState = {
 export const SignInForm = () => {
   const { signUpUser, signInUser } = useAuthContext();
 
-  //!  we need to make the user's saved info appear
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (localStorage.getItem("user")) {
-  //     console.log("we have a user");
-  //     navigate("/account");
-  //   }
-  // }, [navigate]);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      console.log("we have a user");
+      navigate("/account");
+    }
+  }, [navigate]);
 
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState<ValidLogin>(initialFormState);
@@ -134,11 +134,14 @@ export const SignInForm = () => {
       if (newUserId) {
         userSignedIn = true;
       }
-      // ! delete later:
-      console.log("newUser", newUserId); 
       const newUser: User = {
         user_id: newUserId!,
         email: user.email,
+        firstName: "",
+        lastName: "",
+        phone: "",
+        userAddress: initialAddress,
+        orderHistory: [],
       };
       addUserToDB(newUser);
     }

@@ -9,22 +9,23 @@ export interface Address {
   zipCode: string;
 }
 
-export interface Order { 
-  shipTo: Address; 
+export interface Order {
+  shipTo: Address;
   items: Product[];
-  cost: number; 
-  orderId : string;
-  date: Date; 
+  cost: number;
+  orderId: string;
+  date: Date;
 }
 
 export interface User {
+  id?: number;
   user_id: string;
-  firstName?: string;
-  lastName?: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone?: string;
-  userAddress?: Address;
-  orderHistory?: Order[];
+  phone: string;
+  userAddress: Address;
+  orderHistory: Order[];
 }
 
 export interface UserSignIn {

@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userLoading, setUserLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // ! set a timeout function so not forever 
+  //! set a timeout function so not forever 
   const setLocalStorage = (user: User) => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));

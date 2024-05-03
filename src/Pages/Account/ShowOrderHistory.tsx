@@ -5,6 +5,8 @@ import "./Account.css";
 export const ShowOrderHistory = () => {
   const { user } = useUserContext();
 
+  const noOrders = <div>No Orders Yet!</div>;
+
   const userOrders = user.orderHistory?.map((order) => {
     return (
       <tr className="order">
@@ -27,18 +29,22 @@ export const ShowOrderHistory = () => {
   return (
     <>
       <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Order History</Typography>
-      <table className="shop_table my_account_orders">
-        <thead>
-          <tr>
-            <th className="order-number">Order</th>
-            <th className="order-date">Date</th>
-            <th className="order-status">Status</th>
-            <th className="order-total">Total</th>
-            <th className="order-actions">Actions</th>
-          </tr>
-        </thead>
-        <tbody>{userOrders}</tbody>
-      </table>
+      {user.orderHistory.length === 0 ? (
+        noOrders
+      ) : (
+        <table className="shop_table my_account_orders">
+          <thead>
+            <tr>
+              <th className="order-number">Order</th>
+              <th className="order-date">Date</th>
+              <th className="order-status">Status</th>
+              <th className="order-total">Total</th>
+              <th className="order-actions">Actions</th>
+            </tr>
+          </thead>
+          <tbody>{userOrders}</tbody>
+        </table>
+      )}
     </>
   );
 };

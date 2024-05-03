@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 export const updateUserInfoInDB = async (user: User) => {
   const { user_id, firstName, lastName, email, phone, userAddress, orderHistory } = user;
+  const stringAddress = JSON.stringify(userAddress);
   const { data, error } = await supabase
     .from("UserInfo")
     .update({
@@ -11,7 +12,7 @@ export const updateUserInfoInDB = async (user: User) => {
       lastName,
       email,
       phone,
-      userAddress,
+      userAddress: stringAddress,
       orderHistory,
     })
     .eq("user_id", user_id)

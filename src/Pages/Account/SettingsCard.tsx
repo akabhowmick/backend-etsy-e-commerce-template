@@ -3,20 +3,32 @@ import { useState } from "react";
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import CardContent from "@mui/material/CardContent";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { ShowAndEditProfile } from "./ShowAndEditProfile";
 import { ShowAndEditAddress } from "./ShowAndEditAddress";
 import { ShowOrderHistory } from "./ShowOrderHistory";
+import { useAuthContext } from "../../providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import { initialUserValues } from "../../utils/HelpfulText";
+import { useUserContext } from "../../providers/UserProvider";
 
 const tabs = ["Account", "Address", "Order History"];
 
 export const SettingsCard = () => {
+  const { logOutUser } = useAuthContext();
+  const { setUser } = useUserContext();
   const [tabValue, setTabValue] = useState(tabs[0]);
-
+  const navigate = useNavigate();
   const handleTabChange = (_event: React.SyntheticEvent, newValue: string) => {
     setTabValue(newValue);
+  };
+
+  const handleLogOutClick = () => {
+    logOutUser();
+    setUser({ ...initialUserValues });
+    navigate("/");
   };
 
   return (
@@ -48,6 +60,19 @@ export const SettingsCard = () => {
             {tabValue === tabs[0] && <ShowAndEditProfile />}
             {tabValue === tabs[1] && <ShowAndEditAddress />}
             {tabValue === tabs[2] && <ShowOrderHistory />}
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              sx={{ p: "1rem 2rem", my: 2, height: "3rem" }}
+              component="button"
+              size="large"
+              variant="contained"
+              color="info"
+              onClick={() => handleLogOutClick()}
+            >
+              {" "}
+              LOGOUT
+            </Button>
           </Grid>
         </Grid>
       </CardContent>
