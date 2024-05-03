@@ -39,7 +39,6 @@ CSS:
   => order history 
 
 Account: 
-  No Account => ask to login then get redirected to the account
-  Yes Account => logout 
+  when sign in => ask them to authenticate first 
 
 

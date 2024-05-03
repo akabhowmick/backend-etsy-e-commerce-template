@@ -7,6 +7,7 @@ import { useAuthContext } from "../../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { addUserToDB } from "../../api/UserInfoRequests/CreateUserInfoRequest";
 import { initialAddress } from "../../utils/HelpfulText";
+import { useUserContext } from "../../providers/UserProvider";
 
 const initialFormState = {
   email: "",
@@ -21,6 +22,7 @@ const initialFormState = {
 
 export const SignInForm = () => {
   const { signUpUser, signInUser } = useAuthContext();
+  const { getUserFromLocalStorage } = useUserContext();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -145,6 +147,7 @@ export const SignInForm = () => {
       addUserToDB(newUser);
     }
     if (userSignedIn) {
+      getUserFromLocalStorage();
       navigate("/account");
       resetForm();
     }

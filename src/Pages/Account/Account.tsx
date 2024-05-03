@@ -7,7 +7,7 @@ import { useUserContext } from "../../providers/UserProvider";
 
 export const Account = () => {
   const { user } = useUserContext();
-  
+
   return (
     <Grid>
       {user.id !== 0 && (

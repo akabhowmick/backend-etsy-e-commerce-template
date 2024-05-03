@@ -9,17 +9,17 @@ import { updateUserInfoInDB } from "../api/UserInfoRequests/UpdateUserInfoReques
 interface UserContextType {
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
+  getUserFromLocalStorage: () => Promise<void>;
   order: string;
   updateUserInfoThroughAccount: (saveToProfile: boolean) => Promise<void>;
 }
-
 const UserContext = createContext({} as UserContextType);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User>({ ...initialUserValues });
   const [order, setOrder] = useState("");
 
-  const getUserInfoOnFirstLoad = useCallback(async () => {
+  const getUserFromLocalStorage = useCallback(async () => {
     const localUser = localStorage.getItem("user");
     if (localUser) {
       const potentialUser = await getSingleUserInfoFromDB(JSON.parse(localUser).id);
@@ -36,8 +36,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    getUserInfoOnFirstLoad();
-  }, [getUserInfoOnFirstLoad]);
+    getUserFromLocalStorage();
+  }, [getUserFromLocalStorage]);
 
   useEffect(() => {
     setOrder(v4());
@@ -46,6 +46,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   return (
     <UserContext.Provider
       value={{
+        getUserFromLocalStorage,
         user,
         setUser,
         order,
