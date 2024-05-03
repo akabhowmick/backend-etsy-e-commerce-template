@@ -25,7 +25,6 @@ export const SignInForm = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      console.log("we have a user");
       navigate("/account");
     }
   }, [navigate]);
@@ -128,7 +127,7 @@ export const SignInForm = () => {
     const user = { email: formData.email, password: formData.password };
     let userSignedIn = false;
     if (formType === "login") {
-      signInUser(user);
+      userSignedIn = await signInUser(user);
     } else {
       const newUserId = await signUpUser(user);
       if (newUserId) {
@@ -146,6 +145,7 @@ export const SignInForm = () => {
       addUserToDB(newUser);
     }
     if (userSignedIn) {
+      navigate("/account");
       resetForm();
     }
   };
