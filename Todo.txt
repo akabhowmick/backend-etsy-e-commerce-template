@@ -15,22 +15,11 @@ login and sign up have to work with supabase
 
 
 Schedule: 
-Things to do:
-  sign up => ok but need a redirect to the account 
-  sign in => same redirect to the account 
-  logout btn needed in the account 
-
-=> in check out implement a feature that loads in the profile views 
-
-4/21 - supabase backend for login/logout (kind of works); logout 
-4/23 - profile edits 
-4/24 - address changes
+Things to double
+4/23 - profile edits => not working 
+4/24 - address change => not working 
 4/26 - double check logic 
-
-should we treat the address as a separate table? 
-=> make sure i have access to the database 
   => database two things missing 
-    => 1. Take off verification for email (?)
     => learn how to hide api keys 
 
 CSS: 

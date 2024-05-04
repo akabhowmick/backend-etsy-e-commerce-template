@@ -1,16 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Button, Grid, Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import { useUserContext } from "../../providers/UserProvider";
 import { CustomInput } from "./CustomInput";
+import { initialAddress } from "../../utils/HelpfulText";
 
 export const ShowAndEditAddress = () => {
   const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
+  const [originalAddressValues, setOriginalAddressValues] = useState(initialAddress);
 
-  const originalAddressValues = { ...user.userAddress };
-  console.log(originalAddressValues);
+  useEffect(() => {
+    setOriginalAddressValues({ ...user.userAddress });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({
@@ -30,10 +34,11 @@ export const ShowAndEditAddress = () => {
     edit.disabled = !edit.disabled;
     edit.isEdit = !edit.isEdit;
     update({ ...edit });
-    if (JSON.stringify(originalAddressValues) === JSON.stringify(user.userAddress)) {
-      console.log("dummy object", originalAddressValues);
-      console.log("real object", user.userAddress);
-      updateUserInfoThroughAccount(edit.isEdit);
+    if (
+      !edit.isEdit &&
+      JSON.stringify(originalAddressValues) !== JSON.stringify(user.userAddress)
+    ) {
+      updateUserInfoThroughAccount(!edit.isEdit);
     }
   };
 
@@ -55,7 +60,7 @@ export const ShowAndEditAddress = () => {
             <CustomInput
               inputProps={{
                 id: "addressLine1",
-                name: "Address Line 1",
+                name: "addressLine1",
                 value: user.userAddress?.addressLine1,
                 onChange: (e) => changeField(e),
                 title: "Address Line 1",

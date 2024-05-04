@@ -29,7 +29,7 @@ export const ShowOrderHistory = () => {
   return (
     <>
       <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Order History</Typography>
-      {user.orderHistory.length === 0 ? (
+      {user.orderHistory === null || user.orderHistory.length === 0 ? (
         noOrders
       ) : (
         <table className="shop_table my_account_orders">
