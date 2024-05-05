@@ -61,11 +61,12 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "addressLine1",
                 name: "addressLine1",
-                value: user.userAddress?.addressLine1,
+                value: user.userAddress?.addressLine1 ?? "",
                 onChange: (e) => changeField(e),
                 title: "Address Line 1",
                 disabled: edit.disabled,
                 required: edit.required,
+                autoComplete: "address-level1",
               }}
             />
           </Grid>
@@ -74,11 +75,12 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "city",
                 name: "city",
-                value: user.userAddress?.city,
+                value: user.userAddress?.city ?? "",
                 onChange: (e) => changeField(e),
                 title: "City",
                 disabled: edit.disabled,
                 required: edit.required,
+                autoComplete: "off",
               }}
             />
           </Grid>
@@ -87,7 +89,7 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "state",
                 name: "state",
-                value: user.userAddress?.state,
+                value: user.userAddress?.state ?? "",
                 onChange: (e) => changeField(e),
                 title: "State",
                 disabled: edit.disabled,
@@ -100,11 +102,12 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "country",
                 name: "country",
-                value: user.userAddress?.country,
+                value: user.userAddress?.country ?? "",
                 onChange: (e) => changeField(e),
                 title: "Country",
                 disabled: edit.disabled,
                 required: edit.required,
+                autoComplete: "country",
               }}
             />
           </Grid>
@@ -113,11 +116,12 @@ export const ShowAndEditAddress = () => {
               inputProps={{
                 id: "zipCode",
                 name: "zipCode",
-                value: user.userAddress?.zipCode,
+                value: user.userAddress?.zipCode ?? "",
                 onChange: (e) => changeField(e),
                 title: "Zip Code",
                 disabled: edit.disabled,
                 required: edit.required,
+                autoComplete: "postal-code",
               }}
             />
           </Grid>

@@ -27,7 +27,7 @@ export const ShowOrderHistory = () => {
   });
 
   return (
-    <>
+    <div className="order-history">
       <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Order History</Typography>
       {user.orderHistory === null || user.orderHistory.length === 0 ? (
         noOrders
@@ -45,6 +45,6 @@ export const ShowOrderHistory = () => {
           <tbody>{userOrders}</tbody>
         </table>
       )}
-    </>
+    </div>
   );
 };

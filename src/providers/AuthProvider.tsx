@@ -15,7 +15,7 @@ interface AuthContextType {
   userLoading: boolean;
   signUpUser: (user: UserSignIn) => Promise<string | undefined>;
   signInUser: (user: UserSignIn) => Promise<boolean>;
-  editUserLogin: (password: string) => Promise<void>;
+  editUserLogin: (email: string, password: string) => Promise<void>;
   logOutUser: () => Promise<void>;
 }
 
@@ -89,8 +89,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const editUserLogin = async (password: string) => {
-    const { data, error } = await updateUserSupabase(password);
+  const editUserLogin = async (email: string, password: string) => {
+    const { data, error } = await updateUserSupabase(email, password);
     if (data.user) {
       setLocalStorage(data.user);
     }

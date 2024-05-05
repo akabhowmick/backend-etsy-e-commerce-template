@@ -6,6 +6,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
+import FormControl from "@mui/material/FormControl";
+// import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
 
 //APP
 export const CustomInput = ({
@@ -21,37 +24,55 @@ export const CustomInput = ({
     disabled: boolean;
   };
 }) => {
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+  };
+
   return (
     <Box>
       <label style={{ fontWeight: "bold" }} htmlFor={inputProps.id}>
         {inputProps.title}
       </label>
-      <TextField
-        fullWidth
-        margin="dense"
-        size="small"
-        id={inputProps.id}
-        name={inputProps.name}
-        value={inputProps.value}
-        onChange={inputProps.onChange}
-        disabled={inputProps.disabled}
-        required={inputProps.required}
-        type={inputProps.type}
-      >
-        {isPasswordInput && passwordProps && (
-          <InputAdornment position="end">
-            <IconButton
-              onClick={passwordProps.handlePassword}
-              edge="end"
-              disabled={passwordProps.disabled}
-            >
-              {passwordProps.showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        )}
-
-        {inputProps.content}
-      </TextField>
+      {!isPasswordInput ? (
+        <TextField
+          fullWidth
+          margin="dense"
+          size="small"
+          id={inputProps.id}
+          name={inputProps.name}
+          value={inputProps.value}
+          onChange={inputProps.onChange}
+          disabled={inputProps.disabled}
+          required={inputProps.required}
+          type={inputProps.type}
+          autoComplete={inputProps.autoComplete}
+        >
+          {inputProps.content}
+        </TextField>
+      ) : (
+        <div>
+          {" "}
+          <FormControl fullWidth variant="outlined" disabled={inputProps.disabled}>
+            <OutlinedInput
+              id="password"
+              type={passwordProps?.showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={passwordProps?.handlePassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {passwordProps?.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+            />
+          </FormControl>
+        </div>
+      )}
     </Box>
   );
 };

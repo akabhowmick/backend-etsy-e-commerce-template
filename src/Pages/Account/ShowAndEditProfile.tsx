@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { Button, Grid, Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import { CustomInput } from "./CustomInput";
 import { useUserContext } from "../../providers/UserProvider";
+import { initialUserValues } from "../../utils/HelpfulText";
+import { useAuthContext } from "../../providers/AuthProvider";
 
 export const ShowAndEditProfile = () => {
+  const { editUserLogin } = useAuthContext();
   const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
   const [passwordInput, setPasswordInput] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const [originalProfileValues, setOriginalProfileValues] = useState(initialUserValues);
+
+  useEffect(() => {
+    setOriginalProfileValues({ ...user });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
   };
 
   const handlePassword = () => {
-    setShowPassword(false);
+    setShowPassword(!showPassword);
   };
 
   const [edit, update] = useState({
@@ -25,13 +35,21 @@ export const ShowAndEditProfile = () => {
     isEdit: false,
   });
 
-  //! as long as not the same as earlier
   const changeButton = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     edit.disabled = !edit.disabled;
     edit.isEdit = !edit.isEdit;
     update({ ...edit });
-    updateUserInfoThroughAccount(edit.isEdit);
+    if (
+      !edit.isEdit &&
+      JSON.stringify(originalProfileValues) !== JSON.stringify(user.userAddress)
+    ) {
+      updateUserInfoThroughAccount(!edit.isEdit);
+    }
+    //! need to update email too?
+    if (!edit.isEdit && passwordInput) {
+      editUserLogin(user.email, passwordInput);
+    }
   };
 
   return (
@@ -58,6 +76,7 @@ export const ShowAndEditProfile = () => {
                   title: "First Name",
                   disabled: edit.disabled,
                   required: edit.required,
+                  autoComplete: "given-name",
                 }}
               />
             </Grid>
@@ -71,6 +90,7 @@ export const ShowAndEditProfile = () => {
                   title: "Last Name",
                   disabled: edit.disabled,
                   required: edit.required,
+                  autoComplete: "family-name",
                 }}
               ></CustomInput>
             </Grid>
@@ -84,6 +104,7 @@ export const ShowAndEditProfile = () => {
                   title: "Phone Number",
                   disabled: edit.disabled,
                   required: edit.required,
+                  autoComplete: "off",
                 }}
               ></CustomInput>
             </Grid>
@@ -97,21 +118,24 @@ export const ShowAndEditProfile = () => {
                   title: "Email Address",
                   disabled: edit.disabled,
                   required: edit.required,
+                  autoComplete: "off",
                 }}
               ></CustomInput>
             </Grid>
             <Grid item xs={6}>
               <CustomInput
                 inputProps={{
-                  id: "pass",
-                  name: "pass",
-                  value: passwordInput,
+                  id: "password",
+                  name: "password",
+                  value: passwordInput ?? "",
                   onChange: (e) => setPasswordInput(e.target.value),
                   title: "Password",
                   disabled: edit.disabled,
                   required: edit.required,
                   type: showPassword ? "text" : "password",
+                  autoComplete: "new-password",
                 }}
+                isPasswordInput={true}
                 passwordProps={{ handlePassword, showPassword, disabled: edit.disabled }}
               />
             </Grid>

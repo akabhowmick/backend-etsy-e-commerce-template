@@ -1,12 +1,6 @@
 (1-2 hours)
 If you need backend then => set up supabase! 
 
-Supabase 
-=> figure out what type of info to store for a client 
-  => name 
-  => address
-  => order history 
-
 stuff that changes => no more checkout for the first step 
 address if button checked then => we will need to put in the current info 
 change profile => email, phone number, name so first step of the checkout 
@@ -16,8 +10,7 @@ login and sign up have to work with supabase
 
 Schedule: 
 Things to double
-4/23 - profile edits => not working 
-4/24 - address change => not working 
+4/23 - profile edits => password and email should be else where => in general password weird 
 4/26 - double check logic 
   => database two things missing 
     => learn how to hide api keys 
@@ -29,5 +22,3 @@ CSS:
 
 Account: 
   when sign in => ask them to authenticate first 
-
-
