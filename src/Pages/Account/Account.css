@@ -10,6 +10,7 @@
 .order-history {
   padding: 1rem;
   display: flex;
+  flex-direction: column;
 }
 
 .my_account_orders {

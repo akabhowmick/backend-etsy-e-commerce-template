@@ -1,24 +1,14 @@
 (1-2 hours)
 If you need backend then => set up supabase! 
 
-stuff that changes => no more checkout for the first step 
-address if button checked then => we will need to put in the current info 
-change profile => email, phone number, name so first step of the checkout 
-
-login and sign up have to work with supabase 
-
-
 Schedule: 
-Things to double
-4/23 - profile edits => password and email should be else where => in general password weird 
-4/26 - double check logic 
-  => database two things missing 
-    => learn how to hide api keys 
+=> password and email should update
+=>  when sign in => ask them to authenticate first 
+=> database two things missing 
+=> learn how to hide api keys 
 
 CSS: 
   => back to the regular one => when small screen => 275 product card width + 10px margin
   => dark mode 
   => order history 
 
-Account: 
-  when sign in => ask them to authenticate first 

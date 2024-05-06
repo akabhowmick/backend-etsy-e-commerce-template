@@ -131,7 +131,7 @@ export const ShowAndEditAddress = () => {
               component="button"
               size="large"
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={(e) => changeButton(e)}
             >
               {edit.isEdit === true ? "CLICK TO SAVE UPDATE" : "CLICK TO EDIT"}

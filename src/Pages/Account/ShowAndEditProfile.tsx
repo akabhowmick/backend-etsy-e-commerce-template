@@ -46,8 +46,7 @@ export const ShowAndEditProfile = () => {
     ) {
       updateUserInfoThroughAccount(!edit.isEdit);
     }
-    //! need to update email too?
-    if (!edit.isEdit && passwordInput) {
+    if (!edit.isEdit && (passwordInput || originalProfileValues.email !== user.email)) {
       editUserLogin(user.email, passwordInput);
     }
   };
@@ -146,7 +145,7 @@ export const ShowAndEditProfile = () => {
               component="button"
               size="large"
               variant="contained"
-              color="secondary"
+              color="primary"
               onClick={(e) => changeButton(e)}
             >
               {edit.isEdit === true ? "CLICK TO SAVE UPDATE" : "CLICK TO EDIT"}
