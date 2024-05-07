@@ -1,14 +1,15 @@
-(1-2 hours)
-If you need backend then => set up supabase! 
-
 Schedule: 
 => password and email should update
 =>  when sign in => ask them to authenticate first 
+=> allow users to have their information from their account
 => database two things missing 
 => learn how to hide api keys 
 
 CSS: 
   => back to the regular one => when small screen => 275 product card width + 10px margin
   => dark mode 
-  => order history 
+  => Account Page => padding => order history 
 
+Big Boy Issues:
+  Type issues => order/product/address going back and forth with strings
+  Auth and User Providers share name 

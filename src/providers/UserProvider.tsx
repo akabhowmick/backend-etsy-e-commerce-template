@@ -5,6 +5,7 @@ import { User } from "../Types/interfaces";
 import { initialUserValues } from "../utils/HelpfulText";
 import { getSingleUserInfoFromDB } from "../api/UserInfoRequests/ReadUserInfoRequest";
 import { updateUserInfoInDB } from "../api/UserInfoRequests/UpdateUserInfoRequest";
+import { stringToOrder } from "../utils/HelperFunctions";
 
 interface UserContextType {
   user: User;
@@ -24,7 +25,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     if (localUser) {
       const potentialUser = await getSingleUserInfoFromDB(JSON.parse(localUser).id);
       if (potentialUser) {
-        setUser({ ...potentialUser[0], userAddress: JSON.parse(potentialUser[0].userAddress) });
+        const orderStringToArray = potentialUser[0].orderHistory.map((order: string) => {
+          stringToOrder(order)
+        });
+        setUser({
+          ...potentialUser[0],
+          userAddress: JSON.parse(potentialUser[0].userAddress),
+          orderHistory: orderStringToArray,
+        });
       }
     }
   }, [setUser]);

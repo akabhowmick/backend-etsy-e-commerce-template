@@ -1,10 +1,12 @@
 import { User } from "../../Types/interfaces";
+import { ordersToString } from "../../utils/HelperFunctions";
 import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
 export const updateUserInfoInDB = async (user: User) => {
   const { user_id, firstName, lastName, email, phone, userAddress, orderHistory } = user;
   const stringAddress = JSON.stringify(userAddress);
+  const stringOrders = ordersToString(orderHistory);
   const { data, error } = await supabase
     .from("UserInfo")
     .update({
@@ -13,7 +15,7 @@ export const updateUserInfoInDB = async (user: User) => {
       email,
       phone,
       userAddress: stringAddress,
-      orderHistory,
+      orderHistory: stringOrders,
     })
     .eq("user_id", user_id)
     .select();

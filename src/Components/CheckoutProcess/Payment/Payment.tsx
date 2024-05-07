@@ -6,15 +6,29 @@ import { Button } from "@mui/material";
 import { paypalClientId } from "../../../utils/ApiKeys.js";
 import "../Checkout/Checkout.css";
 import Swal from "sweetalert2";
+import { Order } from "../../../Types/interfaces.js";
+import { useUserContext } from "../../../providers/UserProvider.js";
 
 export const Payment = ({ handleNext }: { handleNext: () => void }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const { finalTotal } = useCartContext();
+  const { finalTotal, cartItems } = useCartContext();
+  const { setUser, user, order } = useUserContext();
   const currency = "USD";
 
   const handleNextClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (paymentSuccess) {
+      const newOrder: Order = {
+        shipTo: user.userAddress,
+        items: cartItems,
+        cost: finalTotal,
+        orderId: order,
+        date: new Date(),
+      };
+      setUser({
+        ...user,
+        orderHistory: [...user.orderHistory, newOrder],
+      });
       handleNext();
     } else {
       Swal.fire({

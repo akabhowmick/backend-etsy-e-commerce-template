@@ -1,19 +1,26 @@
 import * as React from "react";
+
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+
 import { useCartContext } from "../../../providers/CartProvider";
 import { useUserContext } from "../../../providers/UserProvider";
 import { Product } from "../../../Types/interfaces";
 import { orderReviewFormId, uploadImagePage } from "../../../utils/ApiKeys";
-import Button from "@mui/material/Button";
 import { addressToString } from "../../../utils/HelperFunctions";
 
 export default function Review() {
   const { cartItems, finalTotal } = useCartContext();
-  const { user, order } = useUserContext();
+  const { user, order, updateUserInfoThroughAccount } = useUserContext();
+
+  React.useEffect(() => {
+    updateUserInfoThroughAccount(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const infoForSeller = [
     { name: "_template_id", value: "table" },
