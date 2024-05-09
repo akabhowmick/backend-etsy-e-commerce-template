@@ -9,7 +9,7 @@ export const ShowOrderHistory = () => {
 
   const userOrders = user.orderHistory?.map((order) => {
     return (
-      <tr className="order">
+      <tr className="order" key={order.orderId}>
         <td className="order-number" data-title="Order">
           <a href="*">{order.orderId}</a>
         </td>

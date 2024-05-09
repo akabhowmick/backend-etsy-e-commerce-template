@@ -90,7 +90,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const editUserLogin = async (email: string, password: string) => {
-    console.log("called in the provider", email, password);
     const { data, error } = await updateUserSupabase(email, password);
     if (data.user) {
       setLocalStorage(data.user);

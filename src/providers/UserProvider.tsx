@@ -10,6 +10,8 @@ import { stringToOrder } from "../utils/HelperFunctions";
 interface UserContextType {
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;
+  orderUser: User;
+  setOrderUser: React.Dispatch<React.SetStateAction<User>>;
   getUserFromLocalStorage: () => Promise<void>;
   order: string;
   updateUserInfoThroughAccount: (saveToProfile: boolean) => Promise<void>;
@@ -17,7 +19,9 @@ interface UserContextType {
 const UserContext = createContext({} as UserContextType);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  //! should rename this to account user info
   const [user, setUser] = useState<User>({ ...initialUserValues });
+  const [orderUser, setOrderUser] = useState<User>({ ...initialUserValues });
   const [order, setOrder] = useState("");
 
   const getUserFromLocalStorage = useCallback(async () => {
@@ -25,13 +29,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     if (localUser) {
       const potentialUser = await getSingleUserInfoFromDB(JSON.parse(localUser).id);
       if (potentialUser) {
-        const orderStringToArray = potentialUser[0].orderHistory.map((order: string) => {
-          stringToOrder(order)
+        const orderStringToArray = potentialUser[0].orderHistory?.map((order: string) => {
+          return stringToOrder(order);
         });
         setUser({
           ...potentialUser[0],
-          userAddress: JSON.parse(potentialUser[0].userAddress),
-          orderHistory: orderStringToArray,
+          userAddress: JSON.parse(potentialUser[0].userAddress) || "",
+          orderHistory: orderStringToArray || [],
         });
       }
     }
@@ -59,6 +63,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         setUser,
         order,
         updateUserInfoThroughAccount,
+        orderUser,
+        setOrderUser,
       }}
     >
       {children}

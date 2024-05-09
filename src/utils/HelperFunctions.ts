@@ -13,6 +13,7 @@ export const productToString = (product: Product) => {
   return result;
 };
 
+//! need customizations?
 export const stringToProduct = (productString: string): Product => {
   const lines = productString.split("\n");
   const product: Product = {
@@ -30,10 +31,9 @@ export const stringToProduct = (productString: string): Product => {
     type: "",
     learnMoreLink: "",
   };
-
   lines.forEach((line) => {
     const [key, value] = line.split(":");
-    let customizations: string[] = [];
+    // let customizations: string[] = [];
     switch (key.trim()) {
       case "Product Name":
         product.name = value.trim();
@@ -41,16 +41,16 @@ export const stringToProduct = (productString: string): Product => {
       case "Quantity":
         product.quantity = parseInt(value.trim(), 10);
         break;
-      case "Required Customizations":
-        customizations = value.trim().split("/n");
-        customizations.forEach((customization) => {
-          const [customizationKey, customizationValue] = customization.split(":");
-          product.requiredCustomizations?.push({
-            key: customizationKey.trim(),
-            value: customizationValue.trim(),
-          });
-        });
-        break;
+      // case "Required Customizations":
+      //   customizations = value.trim().split("/n");
+      //   customizations.forEach((customization) => {
+      //     const [customizationKey, customizationValue] = customization.split(":");
+      //     product.requiredCustomizations?.push({
+      //       key: customizationKey.trim(),
+      //       value: customizationValue.trim(),
+      //     });
+      //   });
+      //   break;
       default:
         break;
     }
@@ -60,11 +60,11 @@ export const stringToProduct = (productString: string): Product => {
 };
 
 export const addressToString = (address: Address) => {
-  let result = `Address Line 1: ${address.addressLine1}\n`;
-  result += `City: ${address.city}\n`;
-  result += `State: ${address.state}\n`;
-  result += `Country: ${address.country}\n`;
-  result += `Zip Code: ${address.zipCode}\n`;
+  let result = `Address Line 1 - ${address.addressLine1}\n`;
+  result += `City - ${address.city}\n`;
+  result += `State - ${address.state}\n`;
+  result += `Country - ${address.country}\n`;
+  result += `Zip Code - ${address.zipCode}\n`;
   return result;
 };
 
@@ -77,9 +77,8 @@ export const stringToAddress = (addressString: string): Address => {
     country: "",
     zipCode: "",
   };
-
   lines.forEach((line) => {
-    const [key, value] = line.split(":");
+    const [key, value] = line.split(" - ");
     switch (key.trim()) {
       case "Address Line 1":
         address.addressLine1 = value.trim();
@@ -145,7 +144,6 @@ export const stringToOrder = (orderString: string): Order => {
         break;
     }
   }
-
   return order;
 };
 

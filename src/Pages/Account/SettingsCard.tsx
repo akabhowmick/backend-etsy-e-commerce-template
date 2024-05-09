@@ -57,11 +57,9 @@ export const SettingsCard = () => {
         {/* FIELDS */}
         <Grid>
           <Grid container direction={{ xs: "column", md: "row" }} columnSpacing={5} rowSpacing={3}>
-            <div id="account-container">
-              {tabValue === tabs[0] && <ShowAndEditProfile />}
-              {tabValue === tabs[1] && <ShowAndEditAddress />}
-              {tabValue === tabs[2] && <ShowOrderHistory />}
-            </div>
+            {tabValue === tabs[0] && <ShowAndEditProfile />}
+            {tabValue === tabs[1] && <ShowAndEditAddress />}
+            {tabValue === tabs[2] && <ShowOrderHistory />}
           </Grid>
           <Grid item xs={6}>
             <Button

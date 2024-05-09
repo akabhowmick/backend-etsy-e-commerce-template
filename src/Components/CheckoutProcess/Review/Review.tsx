@@ -15,7 +15,7 @@ import { addressToString } from "../../../utils/HelperFunctions";
 
 export default function Review() {
   const { cartItems, finalTotal } = useCartContext();
-  const { user, order, updateUserInfoThroughAccount } = useUserContext();
+  const { orderUser, order, updateUserInfoThroughAccount } = useUserContext();
 
   React.useEffect(() => {
     updateUserInfoThroughAccount(true);
@@ -24,20 +24,20 @@ export default function Review() {
 
   const infoForSeller = [
     { name: "_template_id", value: "table" },
-    { name: "Name", value: user.firstName + " " + user.lastName },
+    { name: "Name", value: orderUser.firstName + " " + orderUser.lastName },
     { name: "_subject", value: "Complete Order for Your Business Name!" },
     {
       name: "Email-Address",
-      value: user.email,
+      value: orderUser.email,
     },
     {
       name: "Phone-Number",
-      value: user.phone,
+      value: orderUser.phone,
     },
     { name: "Order-Number", value: order },
     {
       name: "Shipping-Address",
-      value: addressToString(user.userAddress),
+      value: addressToString(orderUser.userAddress),
     },
     {
       name: "Total-Cost",
@@ -94,8 +94,8 @@ export default function Review() {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>{user.firstName + " " + user.lastName}</Typography>
-          <Typography gutterBottom>{addressToString(user.userAddress)}</Typography>
+          <Typography gutterBottom>{orderUser.firstName + " " + orderUser.lastName}</Typography>
+          <Typography gutterBottom>{addressToString(orderUser.userAddress)}</Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" id="order-number">

@@ -1,9 +1,8 @@
 Schedule: 
 => password and email should update
-=>  when sign in => ask them to authenticate first 
+=> when sign in => ask them to authenticate first 
 => allow users to have their information from their account
-=> database two things missing 
-=> learn how to hide api keys 
+=> learn how to hide api keys => developer paypal (?) 
 
 CSS: 
   => back to the regular one => when small screen => 275 product card width + 10px margin

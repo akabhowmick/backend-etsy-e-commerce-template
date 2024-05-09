@@ -1,19 +1,30 @@
 import { Button, Container, Grid, Typography, TextField, Box } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserContext } from "../../../providers/UserProvider";
-import { initialUserValues } from "../../../utils/HelpfulText";
 
 export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
-  const [formValues, setFormValues] = useState(initialUserValues);
-  const { setUser } = useUserContext();
+  const { setOrderUser, user } = useUserContext();
+  const [formValues, setFormValues] = useState({ ...user });
+
+  useEffect(() => {
+    setFormValues({ ...user });
+  }, [user]);
 
   const onChange = (e: { target: { name: string; value: string } }) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
 
+  //! change this for the regular one too(?)
+  const onAddressChange = (e: { target: { name: string; value: string } }) => {
+    setFormValues({
+      ...formValues,
+      userAddress: { ...formValues.userAddress, [e.target.name]: e.target.value },
+    });
+  };
+
   const handleNextClick = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setUser(formValues);
+    setOrderUser(formValues);
     handleNext();
   };
 
@@ -25,7 +36,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>
-                  Your details
+                  Your details (change if needed)
                 </Typography>
               </Grid>
               <Grid item xs={6}>
@@ -80,7 +91,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                 <TextField
                   name="addressLine1"
                   label="Address Line 1"
-                  onChange={onChange}
+                  onChange={onAddressChange}
                   value={formValues.userAddress?.addressLine1}
                   fullWidth
                   variant="standard"
@@ -91,7 +102,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                 <TextField
                   name="city"
                   label="City"
-                  onChange={onChange}
+                  onChange={onAddressChange}
                   value={formValues.userAddress?.city}
                   fullWidth
                   variant="standard"
@@ -102,7 +113,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                 <TextField
                   name="state"
                   label="State"
-                  onChange={onChange}
+                  onChange={onAddressChange}
                   value={formValues.userAddress?.state}
                   fullWidth
                   variant="standard"
@@ -113,7 +124,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                 <TextField
                   name="country"
                   label="Country"
-                  onChange={onChange}
+                  onChange={onAddressChange}
                   value={formValues.userAddress?.country}
                   fullWidth
                   variant="standard"
@@ -124,7 +135,7 @@ export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
                 <TextField
                   name="zipCode"
                   label="Zip Code"
-                  onChange={onChange}
+                  onChange={onAddressChange}
                   value={formValues.userAddress?.zipCode}
                   fullWidth
                   variant="standard"
