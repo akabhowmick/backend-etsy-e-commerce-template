@@ -43,7 +43,7 @@ export const ShowAndEditAddress = () => {
   };
 
   return (
-    <Card variant="outlined" sx={{ height: "100%", width: "100%" }}>
+    <Card className="account-spacing" variant="outlined" sx={{ height: "100%", width: "100%" }}>
       <CardContent
         sx={{
           p: 3,

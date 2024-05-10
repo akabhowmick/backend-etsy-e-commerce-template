@@ -2,13 +2,31 @@
   max-height: none !important;
 }
 
-.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input{
-	padding: 8.5px 14px !important; 
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 8.5px 14px !important;
+}
+
+.css-1coo3bj-MuiPaper-root-MuiCard-root{
+  border: none !important;
+}
+
+@media (min-width: 900px) {
+  .css-1p2m5dj-MuiGrid-root {
+    flex-direction: column !important;
+  }
+}
+
+#account-header {
+  margin: 1rem;
 }
 
 /* Orders */
-.order-history {
+.account-spacing {
   padding: 1rem;
+}
+
+.order-history {
+  margin: 1rem;
   display: flex;
   flex-direction: column;
 }

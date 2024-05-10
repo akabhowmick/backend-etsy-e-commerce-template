@@ -11,9 +11,8 @@ export const Account = () => {
   return (
     <Grid>
       {user.id !== 0 && (
-        <Typography variant="h6" color="black">
-          Welcome to your account
-          {user.firstName?.toUpperCase() + " " + user.lastName?.toUpperCase()}
+        <Typography variant="h6" color="black" id="account-header">
+          {`Welcome to your account ${user.firstName?.toString()} ${user.lastName?.toString()}`}
         </Typography>
       )}
       <SettingsCard />

@@ -1,7 +1,6 @@
 Schedule: 
 => password and email should update
 => when sign in => ask them to authenticate first 
-=> allow users to have their information from their account
 => learn how to hide api keys => developer paypal (?) 
 
 CSS: 
@@ -9,6 +8,6 @@ CSS:
   => dark mode 
   => Account Page => padding => order history 
 
-Big Boy Issues:
-  Type issues => order/product/address going back and forth with strings
+Future Features: 
+  More tables and end points: order/product/address going back and forth with strings => all connected to the main user through the user foreign key
   Auth and User Providers share name 

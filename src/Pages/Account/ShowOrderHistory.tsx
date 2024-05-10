@@ -15,19 +15,18 @@ export const ShowOrderHistory = () => {
         </td>
         <td className="order-date" data-title="Date">
           <time dateTime="2014-06-12" title="1402562157">
-            {order.date.toString()}
+            {order.date.toDateString()}
           </time>
         </td>
         <td className="order-total" data-title="Total">
           <span className="amount">{order.cost}</span>
-          {order.items.length} items
         </td>
       </tr>
     );
   });
 
   return (
-    <div className="order-history">
+    <div className="order-history account-spacing">
       <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Order History</Typography>
       {user.orderHistory === null || user.orderHistory.length === 0 ? (
         noOrders
@@ -37,9 +36,7 @@ export const ShowOrderHistory = () => {
             <tr>
               <th className="order-number">Order</th>
               <th className="order-date">Date</th>
-              <th className="order-status">Status</th>
               <th className="order-total">Total</th>
-              <th className="order-actions">Actions</th>
             </tr>
           </thead>
           <tbody>{userOrders}</tbody>

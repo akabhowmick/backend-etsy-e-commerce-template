@@ -105,6 +105,11 @@ body {
   font-size: 2rem;
 }
 
+button:focus,
+button:focus-visible {
+  outline: none !important;
+}
+
 @media (max-width: 37.5em) {
   #root {
     padding-top: 4rem;
