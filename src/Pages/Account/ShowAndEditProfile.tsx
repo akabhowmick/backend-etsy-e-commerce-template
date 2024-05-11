@@ -15,13 +15,11 @@ export const ShowAndEditProfile = () => {
   const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
   const [passwordInput, setPasswordInput] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const [originalProfileValues, setOriginalProfileValues] = useState(initialUserValues);
 
   useEffect(() => {
     setOriginalProfileValues({ ...user });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -29,6 +27,10 @@ export const ShowAndEditProfile = () => {
 
   const handlePassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordInput(event.target.value);
   };
 
   const [edit, update] = useState({
@@ -49,6 +51,7 @@ export const ShowAndEditProfile = () => {
       updateUserInfoThroughAccount(!edit.isEdit);
     }
     if (!edit.isEdit && (passwordInput || originalProfileValues.email !== user.email)) {
+      console.log("Called the update user", passwordInput, originalProfileValues.email, user.email);
       editUserLogin(user.email, passwordInput);
     }
   };
@@ -128,8 +131,8 @@ export const ShowAndEditProfile = () => {
                 inputProps={{
                   id: "password",
                   name: "password",
-                  value: passwordInput ?? "",
-                  onChange: (e) => setPasswordInput(e.target.value),
+                  value: passwordInput || "",
+                  onChange: (e) => handlePasswordChange(e),
                   title: "Password",
                   disabled: edit.disabled,
                   required: edit.required,
@@ -140,7 +143,13 @@ export const ShowAndEditProfile = () => {
                 passwordProps={{ handlePassword, showPassword, disabled: edit.disabled }}
               />
             </Grid>
-            <Grid id="account-buttons-container" container direction="row" justifyContent="center" alignItems="center">
+            <Grid
+              id="account-buttons-container"
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
               <EditAccount isEdit={edit.isEdit} onClick={(e) => changeButton(e)} />
               <Logout />
             </Grid>

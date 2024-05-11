@@ -93,6 +93,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { data, error } = await updateUserSupabase(email, password);
     if (data.user) {
       setLocalStorage(data.user);
+      swal("Login updated!", "The user credentials edit was successful!", "success");
     }
     if (error) {
       swal("Update error!", `Update Error: ${error.message}`, "error");

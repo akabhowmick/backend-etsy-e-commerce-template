@@ -52,6 +52,11 @@ export const CustomInput = ({
           <FormControl fullWidth variant="outlined" disabled={inputProps.disabled}>
             <OutlinedInput
               id="password"
+              name="password"
+              value={inputProps.value}
+              disabled={inputProps.disabled}
+              required={inputProps.required}
+              onChange={inputProps.onChange}
               type={passwordProps?.showPassword ? "text" : "password"}
               startAdornment={
                 <InputAdornment position="start">
