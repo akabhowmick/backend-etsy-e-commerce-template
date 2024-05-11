@@ -1,4 +1,3 @@
-// IMPORTS
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { ComponentProps } from "react";
@@ -7,10 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import FormControl from "@mui/material/FormControl";
-// import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 
-//APP
 export const CustomInput = ({
   inputProps,
   isPasswordInput,
@@ -56,8 +53,8 @@ export const CustomInput = ({
             <OutlinedInput
               id="password"
               type={passwordProps?.showPassword ? "text" : "password"}
-              endAdornment={
-                <InputAdornment position="end">
+              startAdornment={
+                <InputAdornment position="start">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={passwordProps?.handlePassword}

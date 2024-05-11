@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Button, Grid, Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+
 import { useUserContext } from "../../providers/UserProvider";
 import { CustomInput } from "./CustomInput";
 import { initialAddress } from "../../utils/HelpfulText";
+import { Logout } from "../../Components/AccountBtns/Logout";
+import { EditAccount } from "../../Components/AccountBtns/EditAccount";
+
 
 export const ShowAndEditAddress = () => {
   const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
@@ -56,86 +62,80 @@ export const ShowAndEditAddress = () => {
           <Grid item xs={12}>
             <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Address</Typography>
           </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              inputProps={{
-                id: "addressLine1",
-                name: "addressLine1",
-                value: user.userAddress?.addressLine1 ?? "",
-                onChange: (e) => changeField(e),
-                title: "Address Line 1",
-                disabled: edit.disabled,
-                required: edit.required,
-                autoComplete: "address-level1",
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              inputProps={{
-                id: "city",
-                name: "city",
-                value: user.userAddress?.city ?? "",
-                onChange: (e) => changeField(e),
-                title: "City",
-                disabled: edit.disabled,
-                required: edit.required,
-                autoComplete: "off",
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              inputProps={{
-                id: "state",
-                name: "state",
-                value: user.userAddress?.state ?? "",
-                onChange: (e) => changeField(e),
-                title: "State",
-                disabled: edit.disabled,
-                required: edit.required,
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              inputProps={{
-                id: "country",
-                name: "country",
-                value: user.userAddress?.country ?? "",
-                onChange: (e) => changeField(e),
-                title: "Country",
-                disabled: edit.disabled,
-                required: edit.required,
-                autoComplete: "country",
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <CustomInput
-              inputProps={{
-                id: "zipCode",
-                name: "zipCode",
-                value: user.userAddress?.zipCode ?? "",
-                onChange: (e) => changeField(e),
-                title: "Zip Code",
-                disabled: edit.disabled,
-                required: edit.required,
-                autoComplete: "postal-code",
-              }}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              sx={{ p: "1rem 2rem", my: 2, height: "3rem" }}
-              component="button"
-              size="large"
-              variant="contained"
-              color="primary"
-              onClick={(e) => changeButton(e)}
-            >
-              {edit.isEdit === true ? "CLICK TO SAVE UPDATE" : "CLICK TO EDIT"}
-            </Button>
+          <Grid container direction={{ xs: "column", md: "row" }} columnSpacing={5} rowSpacing={3}>
+            <Grid item xs={6}>
+              <CustomInput
+                inputProps={{
+                  id: "addressLine1",
+                  name: "addressLine1",
+                  value: user.userAddress?.addressLine1 ?? "",
+                  onChange: (e) => changeField(e),
+                  title: "Address Line 1",
+                  disabled: edit.disabled,
+                  required: edit.required,
+                  autoComplete: "address-level1",
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomInput
+                inputProps={{
+                  id: "city",
+                  name: "city",
+                  value: user.userAddress?.city ?? "",
+                  onChange: (e) => changeField(e),
+                  title: "City",
+                  disabled: edit.disabled,
+                  required: edit.required,
+                  autoComplete: "off",
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomInput
+                inputProps={{
+                  id: "state",
+                  name: "state",
+                  value: user.userAddress?.state ?? "",
+                  onChange: (e) => changeField(e),
+                  title: "State",
+                  disabled: edit.disabled,
+                  required: edit.required,
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomInput
+                inputProps={{
+                  id: "country",
+                  name: "country",
+                  value: user.userAddress?.country ?? "",
+                  onChange: (e) => changeField(e),
+                  title: "Country",
+                  disabled: edit.disabled,
+                  required: edit.required,
+                  autoComplete: "country",
+                }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <CustomInput
+                inputProps={{
+                  id: "zipCode",
+                  name: "zipCode",
+                  value: user.userAddress?.zipCode ?? "",
+                  onChange: (e) => changeField(e),
+                  title: "Zip Code",
+                  disabled: edit.disabled,
+                  required: edit.required,
+                  autoComplete: "postal-code",
+                }}
+              />
+            </Grid>
+            <Grid container >
+              <EditAccount isEdit={edit.isEdit} onClick={(e) => changeButton(e)} />
+              <Logout />
+            </Grid>
           </Grid>
         </FormControl>
       </CardContent>

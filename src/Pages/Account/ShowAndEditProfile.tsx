@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { Button, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import { CustomInput } from "./CustomInput";
 import { useUserContext } from "../../providers/UserProvider";
 import { initialUserValues } from "../../utils/HelpfulText";
 import { useAuthContext } from "../../providers/AuthProvider";
+import { EditAccount } from "../../Components/AccountBtns/EditAccount";
+import { Logout } from "../../Components/AccountBtns/Logout";
 
 export const ShowAndEditProfile = () => {
   const { editUserLogin } = useAuthContext();
@@ -52,7 +54,7 @@ export const ShowAndEditProfile = () => {
   };
 
   return (
-    <Card  className="account-spacing" variant="outlined" sx={{ height: "100%", width: "100%" }}>
+    <Card className="account-spacing" variant="outlined" sx={{ height: "100%", width: "100%" }}>
       <CardContent
         sx={{
           p: 3,
@@ -138,18 +140,10 @@ export const ShowAndEditProfile = () => {
                 passwordProps={{ handlePassword, showPassword, disabled: edit.disabled }}
               />
             </Grid>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              sx={{ p: "1rem 2rem", my: 2, height: "3rem" }}
-              component="button"
-              size="large"
-              variant="contained"
-              color="primary"
-              onClick={(e) => changeButton(e)}
-            >
-              {edit.isEdit === true ? "CLICK TO SAVE UPDATE" : "CLICK TO EDIT"}
-            </Button>
+            <Grid id="account-buttons-container" container direction="row" justifyContent="center" alignItems="center">
+              <EditAccount isEdit={edit.isEdit} onClick={(e) => changeButton(e)} />
+              <Logout />
+            </Grid>
           </Grid>
         </FormControl>
       </CardContent>

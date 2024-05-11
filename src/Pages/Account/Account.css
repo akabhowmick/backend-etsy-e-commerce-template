@@ -20,6 +20,10 @@
   margin: 1rem;
 }
 
+#account-buttons-container{
+  text-align: center;
+}
+
 /* Orders */
 .account-spacing {
   padding: 1rem;
