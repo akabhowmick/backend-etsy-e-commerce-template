@@ -27,7 +27,11 @@ export const StackedCards = ({ productsList }: { productsList: Product[] }) => {
     <div>
       <div className="toggle-switch-div">
         <label className="switch">
-          <input type="checkbox" onClick={toggleAnimationHandler} checked={toggleAnimation} />
+          <input
+            type="checkbox"
+            onChange={toggleAnimationHandler}
+            checked={toggleAnimation}
+          />
           <span className="slider round"></span>
         </label>
         <h5>Toggle Scroll Animation</h5>

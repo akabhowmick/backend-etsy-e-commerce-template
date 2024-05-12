@@ -51,7 +51,6 @@ export const ContactForm = () => {
 
   return (
     <form action={contactFormId}>
-      <h4>Get in touch!</h4>
       <div className="contact__form-container">
         <input type="text" name="_honey" style={{ display: "none" }} />
         {contactFormInputs}

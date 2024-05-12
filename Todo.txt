@@ -4,8 +4,7 @@ Schedule:
 
 CSS: 
   => back to the regular one => when small screen => 275 product card width + 10px margin
-  => dark mode 
 
 Future Features: 
-  More tables and end points: order/product/address going back and forth with strings => all connected to the main user through the user foreign key
-  Auth and User Providers share name 
+  1. More tables and end points: order/product/address going back and forth with strings => all connected to the main user through the user foreign key
+  2. Dark mode 
