@@ -1,4 +1,4 @@
-import { User } from "../Types/interfaces";
+import { UserInfo } from "../Types/interfaces";
 
 export const heroText =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna";
@@ -44,7 +44,7 @@ export const initialAddress = {
   zipCode: "",
 };
 
-export const initialUserValues: User = {
+export const initialUserValues: UserInfo = {
   id: 0,
   user_id: "",
   firstName: "",

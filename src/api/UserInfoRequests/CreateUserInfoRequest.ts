@@ -1,8 +1,8 @@
-import { User } from "../../Types/interfaces";
+import { UserInfo } from "../../Types/interfaces";
 import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
-export const addUserToDB = async (user: User) => {
+export const addUserToDB = async (user: UserInfo) => {
   const { user_id, email } = user;
   const { data, error } = await supabase
     .from("UserInfo")

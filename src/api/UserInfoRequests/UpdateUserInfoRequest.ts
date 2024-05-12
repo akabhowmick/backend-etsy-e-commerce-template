@@ -1,9 +1,9 @@
-import { User } from "../../Types/interfaces";
+import { UserInfo } from "../../Types/interfaces";
 import { ordersToString } from "../../utils/HelperFunctions";
 import { supabase } from "../supabase-requests";
 import Swal from "sweetalert2";
 
-export const updateUserInfoInDB = async (user: User) => {
+export const updateUserInfoInDB = async (user: UserInfo) => {
   const { user_id, firstName, lastName, email, phone, userAddress, orderHistory } = user;
   const stringAddress = JSON.stringify(userAddress);
   const stringOrders = ordersToString(orderHistory);
