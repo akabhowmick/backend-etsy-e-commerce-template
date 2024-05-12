@@ -1,5 +1,4 @@
 Schedule: 
-=> password and email should update
 => when sign in => ask them to authenticate first 
 => learn how to hide api keys => developer paypal (?) 
 

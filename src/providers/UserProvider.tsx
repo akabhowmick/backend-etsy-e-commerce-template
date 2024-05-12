@@ -1,17 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useEffect, useState, createContext, useContext, ReactNode, useCallback } from "react";
 import { v4 } from "uuid";
-import { User } from "../Types/interfaces";
+import { UserInfo } from "../Types/interfaces";
 import { initialUserValues } from "../utils/HelpfulText";
 import { getSingleUserInfoFromDB } from "../api/UserInfoRequests/ReadUserInfoRequest";
 import { updateUserInfoInDB } from "../api/UserInfoRequests/UpdateUserInfoRequest";
 import { stringToOrder } from "../utils/HelperFunctions";
 
 interface UserContextType {
-  user: User;
-  setUser: React.Dispatch<React.SetStateAction<User>>;
-  orderUser: User;
-  setOrderUser: React.Dispatch<React.SetStateAction<User>>;
+  userInfo: UserInfo;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserInfo>>;
+  orderUser: UserInfo;
+  setOrderUser: React.Dispatch<React.SetStateAction<UserInfo>>;
   getUserFromLocalStorage: () => Promise<void>;
   order: string;
   updateUserInfoThroughAccount: (saveToProfile: boolean) => Promise<void>;
@@ -20,8 +20,8 @@ const UserContext = createContext({} as UserContextType);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   //! should rename this to account user info
-  const [user, setUser] = useState<User>({ ...initialUserValues });
-  const [orderUser, setOrderUser] = useState<User>({ ...initialUserValues });
+  const [userInfo, setUserInfo] = useState<UserInfo>({ ...initialUserValues });
+  const [orderUser, setOrderUser] = useState<UserInfo>({ ...initialUserValues });
   const [order, setOrder] = useState("");
 
   const getUserFromLocalStorage = useCallback(async () => {
@@ -32,18 +32,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         const orderStringToArray = potentialUser[0].orderHistory?.map((order: string) => {
           return stringToOrder(order);
         });
-        setUser({
+        setUserInfo({
           ...potentialUser[0],
           userAddress: JSON.parse(potentialUser[0].userAddress) || "",
           orderHistory: orderStringToArray || [],
         });
       }
     }
-  }, [setUser]);
+  }, [setUserInfo]);
 
   const updateUserInfoThroughAccount = async (saveToProfile: boolean) => {
     if (saveToProfile) {
-      updateUserInfoInDB(user);
+      updateUserInfoInDB(userInfo);
     }
   };
 
@@ -59,8 +59,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     <UserContext.Provider
       value={{
         getUserFromLocalStorage,
-        user,
-        setUser,
+        userInfo,
+        setUserInfo,
         order,
         updateUserInfoThroughAccount,
         orderUser,

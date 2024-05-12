@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useUserContext } from "../../../providers/UserProvider";
 
 export const Shipping = ({ handleNext }: { handleNext: () => void }) => {
-  const { setOrderUser, user } = useUserContext();
-  const [formValues, setFormValues] = useState({ ...user });
+  const { setOrderUser, userInfo } = useUserContext();
+  const [formValues, setFormValues] = useState({ ...userInfo });
 
   useEffect(() => {
-    setFormValues({ ...user });
-  }, [user]);
+    setFormValues({ ...userInfo });
+  }, [userInfo]);
 
   const onChange = (e: { target: { name: string; value: string } }) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });

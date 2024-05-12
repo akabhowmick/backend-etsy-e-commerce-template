@@ -8,12 +8,12 @@ import { initialUserValues } from "../../utils/HelpfulText";
 
 export const Logout = () => {
   const { logOutUser } = useAuthContext();
-  const { setUser } = useUserContext();
+  const { setUserInfo } = useUserContext();
 
   const navigate = useNavigate();
   const handleLogOutClick = () => {
     logOutUser();
-    setUser({ ...initialUserValues });
+    setUserInfo({ ...initialUserValues });
     navigate("/");
   };
   return (

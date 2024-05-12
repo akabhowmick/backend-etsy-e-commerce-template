@@ -12,22 +12,22 @@ import { useUserContext } from "../../../providers/UserProvider.js";
 export const Payment = ({ handleNext }: { handleNext: () => void }) => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const { finalTotal, cartItems } = useCartContext();
-  const { setUser, user, order } = useUserContext();
+  const { setUserInfo, userInfo, order } = useUserContext();
   const currency = "USD";
 
   const handleNextClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (paymentSuccess) {
       const newOrder: Order = {
-        shipTo: user.userAddress,
+        shipTo: userInfo.userAddress,
         items: cartItems,
         cost: finalTotal,
         orderId: order,
         date: new Date(),
       };
-      setUser({
-        ...user,
-        orderHistory: [...user.orderHistory, newOrder],
+      setUserInfo({
+        ...userInfo,
+        orderHistory: [...userInfo.orderHistory, newOrder],
       });
       handleNext();
     } else {

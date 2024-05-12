@@ -14,18 +14,18 @@ import { EditAccount } from "../../Components/AccountBtns/EditAccount";
 
 
 export const ShowAndEditAddress = () => {
-  const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
+  const { userInfo, setUserInfo, updateUserInfoThroughAccount } = useUserContext();
   const [originalAddressValues, setOriginalAddressValues] = useState(initialAddress);
 
   useEffect(() => {
-    setOriginalAddressValues({ ...user.userAddress });
+    setOriginalAddressValues({ ...userInfo.userAddress });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({
-      ...user,
-      userAddress: { ...user.userAddress, [event.target.name]: event.target.value },
+    setUserInfo({
+      ...userInfo,
+      userAddress: { ...userInfo.userAddress, [event.target.name]: event.target.value },
     });
   };
 
@@ -42,7 +42,7 @@ export const ShowAndEditAddress = () => {
     update({ ...edit });
     if (
       !edit.isEdit &&
-      JSON.stringify(originalAddressValues) !== JSON.stringify(user.userAddress)
+      JSON.stringify(originalAddressValues) !== JSON.stringify(userInfo.userAddress)
     ) {
       updateUserInfoThroughAccount(!edit.isEdit);
     }
@@ -68,7 +68,7 @@ export const ShowAndEditAddress = () => {
                 inputProps={{
                   id: "addressLine1",
                   name: "addressLine1",
-                  value: user.userAddress?.addressLine1 ?? "",
+                  value: userInfo.userAddress?.addressLine1 ?? "",
                   onChange: (e) => changeField(e),
                   title: "Address Line 1",
                   disabled: edit.disabled,
@@ -82,7 +82,7 @@ export const ShowAndEditAddress = () => {
                 inputProps={{
                   id: "city",
                   name: "city",
-                  value: user.userAddress?.city ?? "",
+                  value: userInfo.userAddress?.city ?? "",
                   onChange: (e) => changeField(e),
                   title: "City",
                   disabled: edit.disabled,
@@ -96,7 +96,7 @@ export const ShowAndEditAddress = () => {
                 inputProps={{
                   id: "state",
                   name: "state",
-                  value: user.userAddress?.state ?? "",
+                  value: userInfo.userAddress?.state ?? "",
                   onChange: (e) => changeField(e),
                   title: "State",
                   disabled: edit.disabled,
@@ -109,7 +109,7 @@ export const ShowAndEditAddress = () => {
                 inputProps={{
                   id: "country",
                   name: "country",
-                  value: user.userAddress?.country ?? "",
+                  value: userInfo.userAddress?.country ?? "",
                   onChange: (e) => changeField(e),
                   title: "Country",
                   disabled: edit.disabled,
@@ -123,7 +123,7 @@ export const ShowAndEditAddress = () => {
                 inputProps={{
                   id: "zipCode",
                   name: "zipCode",
-                  value: user.userAddress?.zipCode ?? "",
+                  value: userInfo.userAddress?.zipCode ?? "",
                   onChange: (e) => changeField(e),
                   title: "Zip Code",
                   disabled: edit.disabled,

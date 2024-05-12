@@ -3,11 +3,11 @@ import { useUserContext } from "../../providers/UserProvider";
 import "./Account.css";
 
 export const ShowOrderHistory = () => {
-  const { user } = useUserContext();
+  const { userInfo } = useUserContext();
 
   const noOrders = <div>No Orders Yet!</div>;
 
-  const userOrders = user.orderHistory?.map((order) => {
+  const userOrders = userInfo.orderHistory?.map((order) => {
     return (
       <tr className="order" key={order.orderId}>
         <td className="order-number" data-title="Order">
@@ -28,7 +28,7 @@ export const ShowOrderHistory = () => {
   return (
     <div className="order-history account-spacing">
       <Typography sx={{ fontSize: "1.25rem", marginBottom: "0" }}>Order History</Typography>
-      {user.orderHistory === null || user.orderHistory.length === 0 ? (
+      {userInfo.orderHistory === null || userInfo.orderHistory.length === 0 ? (
         noOrders
       ) : (
         <table className="shop_table my_account_orders">

@@ -12,17 +12,17 @@ import { Logout } from "../../Components/AccountBtns/Logout";
 
 export const ShowAndEditProfile = () => {
   const { editUserLogin } = useAuthContext();
-  const { user, setUser, updateUserInfoThroughAccount } = useUserContext();
+  const { userInfo, setUserInfo, updateUserInfoThroughAccount } = useUserContext();
   const [passwordInput, setPasswordInput] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [originalProfileValues, setOriginalProfileValues] = useState(initialUserValues);
 
   useEffect(() => {
-    setOriginalProfileValues({ ...user });
-  }, [user]);
+    setOriginalProfileValues({ ...userInfo });
+  }, [userInfo]);
 
   const changeField = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUser({ ...user, [event.target.name]: event.target.value });
+    setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
   };
 
   const handlePassword = () => {
@@ -46,13 +46,13 @@ export const ShowAndEditProfile = () => {
     update({ ...edit });
     if (
       !edit.isEdit &&
-      JSON.stringify(originalProfileValues) !== JSON.stringify(user.userAddress)
+      JSON.stringify(originalProfileValues) !== JSON.stringify(userInfo.userAddress)
     ) {
       updateUserInfoThroughAccount(!edit.isEdit);
     }
-    if (!edit.isEdit && (passwordInput || originalProfileValues.email !== user.email)) {
-      console.log("Called the update user", passwordInput, originalProfileValues.email, user.email);
-      editUserLogin(user.email, passwordInput);
+    if (!edit.isEdit && (passwordInput || originalProfileValues.email !== userInfo.email)) {
+      console.log("Called the update userInfo", passwordInput, originalProfileValues.email, userInfo.email);
+      editUserLogin(userInfo.email, passwordInput);
     }
   };
 
@@ -75,7 +75,7 @@ export const ShowAndEditProfile = () => {
                 inputProps={{
                   id: "firstName",
                   name: "firstName",
-                  value: user.firstName ?? "",
+                  value: userInfo.firstName ?? "",
                   onChange: (e) => changeField(e),
                   title: "First Name",
                   disabled: edit.disabled,
@@ -89,7 +89,7 @@ export const ShowAndEditProfile = () => {
                 inputProps={{
                   id: "lastName",
                   name: "lastName",
-                  value: user.lastName || "",
+                  value: userInfo.lastName || "",
                   onChange: (e) => changeField(e),
                   title: "Last Name",
                   disabled: edit.disabled,
@@ -103,7 +103,7 @@ export const ShowAndEditProfile = () => {
                 inputProps={{
                   id: "phone",
                   name: "phone",
-                  value: user.phone || "",
+                  value: userInfo.phone || "",
                   onChange: (e) => changeField(e),
                   title: "Phone Number",
                   disabled: edit.disabled,
@@ -117,7 +117,7 @@ export const ShowAndEditProfile = () => {
                 inputProps={{
                   id: "email",
                   name: "email",
-                  value: user.email ?? "",
+                  value: userInfo.email ?? "",
                   onChange: (e) => changeField(e),
                   title: "Email Address",
                   disabled: edit.disabled,

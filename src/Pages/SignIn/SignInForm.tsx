@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./SignIn.css";
-import { User, ValidLogin } from "../../Types/interfaces";
+import { UserInfo, ValidLogin } from "../../Types/interfaces";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { useAuthContext } from "../../providers/AuthProvider";
@@ -135,7 +135,7 @@ export const SignInForm = () => {
       if (newUserId) {
         userSignedIn = true;
       }
-      const newUser: User = {
+      const newUser: UserInfo = {
         user_id: newUserId!,
         email: user.email,
         firstName: "",
