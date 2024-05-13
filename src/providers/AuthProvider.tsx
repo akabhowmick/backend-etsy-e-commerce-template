@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [userLoading, setUserLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  //! set a timeout function so not forever 
+  //! set a timeout function so not forever
   const setLocalStorage = (user: User) => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -74,6 +74,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (data.user) {
       setLocalStorage(data.user);
       setUser(data.user);
+      swal("Sign up success!", "Please verify your account to proceed", "info");
       return data!.user?.id;
     }
   };

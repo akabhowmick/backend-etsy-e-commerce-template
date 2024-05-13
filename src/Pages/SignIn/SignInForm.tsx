@@ -27,7 +27,7 @@ export const SignInForm = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      navigate("/account");
+      navigate("/");
     }
   }, [navigate]);
 

@@ -27,11 +27,11 @@ export function Routes() {
         />
         <Route
           path="page-2"
-          element={<ProductPage pageHeader="Category 1 Products" pageContent="Type-2" />}
+          element={<ProductPage pageHeader="Category 2 Products" pageContent="Type-2" />}
         />
         <Route
           path="page-3"
-          element={<ProductPage pageHeader="Category 1 Products" pageContent="Type-3" />}
+          element={<ProductPage pageHeader="Category 3 Products" pageContent="Type-3" />}
         />
         <Route path="/signin" element={<SignInForm />} />
         <Route

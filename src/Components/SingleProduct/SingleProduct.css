@@ -7,8 +7,9 @@
 #learn-more-btn,
 #redirect-btn button,
 #card-cart-btn:hover {
-  background-color: var(--primary);
-  color: white;
+  background-color: #fffaf2;
+  color: black;
+  border: 1px solid var(--primary);
 }
 
 #learn-more-btn:hover,
@@ -209,7 +210,10 @@
 
 @media only screen and (max-width: 37.5em) {
   .product-banner .product-info-buttons {
-    gap: 0px;
+    gap: 10px;
+  }
+  .toggle-switch-div {
+    display: none;
   }
 }
 

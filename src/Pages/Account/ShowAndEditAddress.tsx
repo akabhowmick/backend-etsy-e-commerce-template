@@ -12,7 +12,6 @@ import { initialAddress } from "../../utils/HelpfulText";
 import { Logout } from "../../Components/AccountBtns/Logout";
 import { EditAccount } from "../../Components/AccountBtns/EditAccount";
 
-
 export const ShowAndEditAddress = () => {
   const { userInfo, setUserInfo, updateUserInfoThroughAccount } = useUserContext();
   const [originalAddressValues, setOriginalAddressValues] = useState(initialAddress);
@@ -132,7 +131,13 @@ export const ShowAndEditAddress = () => {
                 }}
               />
             </Grid>
-            <Grid container >
+            <Grid
+              id="account-buttons-container"
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+            >
               <EditAccount isEdit={edit.isEdit} onClick={(e) => changeButton(e)} />
               <Logout />
             </Grid>

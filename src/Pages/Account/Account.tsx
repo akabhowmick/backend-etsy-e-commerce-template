@@ -8,11 +8,12 @@ import { useUserContext } from "../../providers/UserProvider";
 export const Account = () => {
   const { userInfo } = useUserContext();
 
+  const nameOfUser = userInfo.firstName + " " + userInfo.lastName || "";
   return (
     <Grid>
       {userInfo.id !== 0 && (
         <Typography variant="h6" color="black" id="account-header">
-          {`Welcome to your account ${userInfo.firstName?.toString()} ${userInfo.lastName?.toString()}`}
+          {`Welcome to your account ${nameOfUser}!`}
         </Typography>
       )}
       <SettingsCard />

@@ -190,6 +190,9 @@
   .slide-ctrl-container{
     margin: 1rem 0;
   }
+  .hero__lead{
+    text-align: center;
+  }
 }
 
 /* Social bar */

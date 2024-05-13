@@ -1,10 +1,9 @@
-Schedule: 
-=> when sign in => ask them to authenticate first 
 => learn how to hide api keys => developer paypal (?) 
-
-CSS: 
-  => back to the regular one => when small screen => 275 product card width + 10px margin
 
 Future Features: 
   1. More tables and end points: order/product/address going back and forth with strings => all connected to the main user through the user foreign key
   2. Dark mode 
+
+
+CSS 
+=> mobile view eh

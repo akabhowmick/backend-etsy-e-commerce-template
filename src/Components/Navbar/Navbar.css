@@ -48,7 +48,7 @@
     font-size: 1rem;
   }
   #logo-with-title h2 {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
 }
 
@@ -103,6 +103,7 @@
     margin-right: unset;
     margin-top: 22px;
     font-size: 1.5rem;
+    text-align: center;
   }
   .cart-small-screen {
     display: block;
